@@ -1,0 +1,36 @@
+{% load mma_filters %}
+<div class="event-info-container">
+    <div class="event-poster">
+        {% poster event %}
+    </div>
+    <div class="event-info">
+        <table  class="mdl-data-table mdl-js-data-table no-hover">
+          <col width="130">
+          <col>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><strong>Sport:</strong></td>
+                <td class="mdl-data-table__cell--non-numeric">{{event.sport}}</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><strong>Promotion:</strong></td>
+                <td class="mdl-data-table__cell--non-numeric">{{event.promotion}}</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><strong>Date:</strong></td>
+                <td class="mdl-data-table__cell--non-numeric">{{event.date}}</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><strong>Venue:</strong></td>
+                <td class="mdl-data-table__cell--non-numeric">{{event.venue}}</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><strong>City:</strong></td>
+                <td class="mdl-data-table__cell--non-numeric">{{event.city}}</td>
+            </tr>
+            <tr>
+                <td class="mdl-data-table__cell--non-numeric"><strong>Broadcast:</strong></td>
+                <td class="mdl-data-table__cell--non-numeric">{{event.broadcast}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

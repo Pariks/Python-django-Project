@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{flatpage.title}} | Bet on Combat{% endblock %}
+{% load url from future %}
+{% load i18n staticfiles %}
+{% block fb_title %}{{flatpage.title}} | Bet on Combat{% endblock %}
+{% block fb_description %}Contact Bet on Combat.{% endblock %}
+{% load app_filters %}
+
+{% block maincontent %}
+<section>
+    <div class="section-header">
+        <h2>
+            {{flatpage.title}}
+        </h2>
+    </div>
+    <div class="section-body">
+         {{flatpage.content|safe}}
+          <form method="post" class="full-width" action="{% url 'contact' %}" id="contact-form">
+            {% csrf_token %}
+            <div>
+            {{ form.name|material }}
+            </div>
+            <div>
+            {{ form.subject|material }}
+            </div>
+            <div>
+                {{ form.email|material }}
+            </div>
+            {{ form.message|material }}
+            <input type="hidden" name="next" value="{{next}}">
+            <div class="form-actions text-center">
+              <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Submit</button>
+            </div>
+            {% if sent %}
+            <p>
+                <div class="alert alert-success" role="alert">Message Sent</div>
+            </p>
+            {% endif %}
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+  

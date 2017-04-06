@@ -1,0 +1,140 @@
+/*
+.navbar{
+  background-color:@navbar-bg-color;
+  border:0;
+  .nav{
+    li{
+      a{
+        color:white;
+        text-transform:uppercase;
+        text-rendering: optimizelegibility;
+        letter-spacing: 1px;
+        border-bottom:3px solid @navbar-bg-color;
+        &.active, &:hover{
+          border-bottom:3px solid @color-gold;
+          color:white;
+          background-color:@navbar-bg-color-hover;
+        }
+      }
+    }
+  }
+}
+*/
+.navbar{
+  
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  border:0;
+  height:80px;
+  @media (min-width: @screen-sm-min) {
+    background-color:@navbar-bg-color;
+  }
+  .navbar-toggle{
+    margin-top:23px;
+    margin-bottom:22px;
+    border:0;
+    &:hover, &:focus{
+      background-color:black;
+      .icon-bar{
+        background-color:white;
+        .transition(background-color, 0.5s);
+      }
+    }
+    .icon-bar{
+      height:3px;
+    }
+    
+  }
+  .navbar-collapse.collapse, .navbar-collapse.collapsing{
+    border:0;
+    background-color:black;
+    width:160px;
+    float:right;
+    max-height:400px;
+    @media (min-width: @screen-sm-min) {
+      width:auto;
+      float:left;
+    }
+  }
+  .navbar-brand{
+    padding:0;
+    padding-right:0;
+    width:250px;
+    height:auto;
+    margin-left:10px;
+    
+    @media (min-width: @screen-sm-min) {
+      margin-right:10px;
+       width:180px;
+    }
+    @media (min-width: @screen-md-min) {
+      width:320px;
+      margin-left:0;
+    }
+    @media (min-width: @screen-lg-min) {
+      width:auto;
+    }
+    img{
+      margin-top:16px;
+      margin-top:20px;
+       max-width:100%;
+      @media (min-width: @screen-md-min) {
+        max-width:80%;
+      }
+    }
+    
+  }
+  .nav{
+    li{
+      a{
+        color:white;
+        text-transform:uppercase;
+        text-rendering: optimizelegibility;
+        letter-spacing: 1px;
+        border-bottom:3px solid @navbar-bg-color;
+        padding: 10px 0 5px 0;
+        margin: 0 25px 0 15px;
+        font-size:12px;
+        text-align:right;
+        
+        @media (min-width: @screen-sm-min) {
+            text-align:left;
+            margin-top:20px;
+            margin-right:5px;
+            margin-left:5px;
+        }
+        @media (min-width: @screen-lg-min) {
+          margin-right:20px;
+        }
+        &.active, &:hover{
+          color:@color-gold;
+          .transition(color, 0.3s);
+          @media (min-width: @screen-sm-min) {
+            border-bottom:2px solid @color-gold;
+            color:white;
+            .transition(border-bottom, 0.3s);
+          }
+        }
+      }
+      &.mobile{
+        display:block;
+        @media (min-width: @screen-sm-min) {
+          display:none;
+        }
+      }
+    }
+  }
+  
+  .navbar-login{
+    display:none;
+      @media (min-width: @screen-md-min) {
+        display:block;
+        position:fixed;
+        right:0;
+        top:0;
+      }
+  }
+}
+.navbar-header{
+  background-color:@navbar-bg-color;
+}

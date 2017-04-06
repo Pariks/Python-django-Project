@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% block title %}Bookmakers | Bet on Combat{% endblock %}
+{% block fb_title %}Bookmakers | Bet on Combat{% endblock %}
+{% block fb_description %}Top bookmakers for betting on combat sports.{% endblock %}
+{% block nav-bookmakers-class %}active{% endblock %}
+{% block nav-bookmakers-class-mobile %}active{% endblock %}
+
+{% block maincontent %}
+<section class="mdl-shadow--2dp bookmakers">
+    <div class="section-header">
+        <h2>Bookmakers</h2>
+         <hr class="divider">
+         {% for bookmakershead in bookmakersheads %}
+            {{bookmakershead.content|safe}}
+         {%endfor%}
+       
+    </div>
+    <div class="section-body">
+        {% for bookmaker in bookmakers%}
+            {% if bookmaker.get_square_banner %}
+            <div class="clearfix bookmaker-container">
+                <div class="pull-left banner-container">
+                    {{ bookmaker.get_square_banner|safe}}
+                </div>
+                <div class="content-container">
+                    <h2 class="bookmaker-name"><a href="{{bookmaker.get_absolute_url}}">{{ bookmaker.name}}</a></h2>
+                    {% include 'bookmakers/_bookmaker_table.html' %}
+                </div>
+            </div>
+            
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+  

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block title %}Events | Bet on Combat{% endblock %}
+{% block fb_title %}Event | Bet on Combat{% endblock %}
+{% block fb_description %}Upcoming and past MMA and Boxing Events.{% endblock %}
+{% block nav-events-class %}active{% endblock %}
+{% block nav-events-class-mobile %}active{% endblock %}
+
+{% block maincontent %}
+<section>
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+      <h2>
+          Events
+      </h2>
+      <div class="mdl-tabs__tab-bar">
+          <a href="#upcoming-panel" class="mdl-tabs__tab is-active">Upcoming</a>
+          <a href="#recent-panel" class="mdl-tabs__tab">Recent</a>
+      </div>
+    
+      <div class="mdl-tabs__panel is-active" id="upcoming-panel">
+        <div>
+        {% for event in upcoming_events %}
+            {% include 'mma/_event_list.html' %}
+        {% endfor %}
+        </div>
+        <div class="text-right">
+            <a href="{% url 'mma:upcoming_events' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">All Upcoming Events</a>
+        </div>
+      </div>
+      <div class="mdl-tabs__panel" id="recent-panel">
+         <div>
+        {% for event in recent_events %}
+            {% include 'mma/_event_list.html' %}
+        {% endfor %}
+        </div>
+        <div class="text-right">
+            <a href="{% url 'mma:past_events' %}" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent">All Past Events</a>
+        </div>
+      </div>
+  </div>
+</section>
+{% endblock %}
+  

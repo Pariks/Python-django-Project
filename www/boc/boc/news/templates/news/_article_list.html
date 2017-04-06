@@ -1,0 +1,23 @@
+<div class="list-container">
+    <div class="image-container">
+        {% if article.image %}
+        <a href="{{ article.get_absolute_url }}" title="{{ article.title }}" rel="bookmark">
+          <img src="{{ article.image.url }}" alt="{{ article.title }}" class="left" />
+        </a>
+        {% endif %}
+    </div>
+    <div class="content-container">
+        <h4>
+            <a href="{{ article.get_absolute_url }}" title="{{ article.title }}" rel="bookmark">
+            {{article.title}}
+            </a>
+        </h4>
+        <div class="content-info">
+            Written by {{article.author.username}} - {{ article.date_published|date:"DATE_FORMAT" }}
+        </div>
+      <div class="content-preview">
+        {{article.preview_content}}
+      </div>
+    </div>
+</div>
+    

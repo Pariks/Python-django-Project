@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+{% block title %}{{flatpage.title}} | Bet on Combat{% endblock %}
+{% load url from future %}
+{% load i18n staticfiles %}
+{% block fb_title %}{{flatpage.title}} | Bet on Combat{% endblock %}
+{% block fb_description %}Glossary of Combat Sports terminology.{% endblock %}
+{% block fb_img %}{% endblock %}
+
+{% block maincontent %}
+<div class="container main-container" id="glossary">
+        <section class="section">
+            <div class="section-header">
+                <h2>
+                    {{flatpage.title}}
+                </h2>
+            </div>
+            <div class="container-fluid sub-menu">
+                 <div class="row text-center">
+                    <div class="col-xs-6"><a class="{% if flatpage.url == '/betting-guide/' %}active{% endif %}" href="{% url 'betting_guide' %}">Betting Guide</a></div>
+                    <div class="col-xs-6"><a class="{% if flatpage.url == '/betting-guide/glossary/' %}active{% endif %}" href="{% url 'glossary' %}">Glossary</a></div>
+                </div>
+            </div>
+            <div class="section-body">
+                Here are some gambling terms and sport betting definitions that apply to betting on combat sports. 
+                <div class="glossary-letters">
+                    <a href="#a">A</a>
+                    <a href="#b">B</a> 
+                    <a href="#c">C</a>
+                    <a href="#d">D</a>
+                    <a href="#e">E</a>
+                    <a href="#f">F</a>
+                    <a href="#g">G</a>
+                    <a href="#h">H</a>
+                    <a href="#i">I</a>
+                    <a href="#j">J</a>
+                    <a href="#k">K</a>
+                    <a href="#l">L</a>
+                    <a href="#m">M</a>
+                    <a href="#n">N</a>
+                    <a href="#o">O</a>
+                    <a href="#p">P</a>
+                    <a href="#q">Q</a>
+                    <a href="#r">R</a>
+                    <a href="#s">S</a>
+                    <a href="#t">T</a>
+                    <a href="#u">U</a>
+                    <a href="#v">V</a>
+                    <a href="#w">W</a>
+                    <a href="#x">X</a>
+                    <a href="#y">Y</a>
+                    <a href="#z">Z</a> 
+                </div>
+                
+                <div id="a" class="glossary-heading">A</div>
+                <ul>
+                <li><strong>Action:</strong></strong> A sports betting wager of any kind, a bet.</li>
+                
+                <li><strong>Angles:</strong></strong> Using key factors from previous events to predict the results for future outcomes.</li>
+                </ul>
+                
+                <div id="b" class="glossary-heading">B</div>
+                 <ul>
+                <li><strong>Bet:</strong> To risk money on the outcome of an event.</li>
+                
+                <li><strong>Book:</strong> An establishment that accepts bets on the outcome of sporting events.</li>
+                
+                <li><strong>Bookie:</strong> A person who accepts bets.</li>
+                
+                <li><strong>Bookmaker:</strong> see Bookie.</li>
+                
+                <li><strong>Bettor:</strong> A person who place a bets based on particular information, or feeling, on sporting or other events in the hope of gaining financial profit.</li>
+                
+                <li><strong>Beard:</strong> an acquaintance of a gambler who bets a lot of money and wants to remain anonymous. The “beard” will place the bet for him.</li>
+                
+                <li><strong>Bankroll:</strong> Total amount of money a gambler has to bet with.</li>
+                
+                <li><strong>Buck:</strong> A slang term for a $100 wager.</li>
+                </ul>
+                <div id="c" class="glossary-heading">C</div>
+                 <ul>
+                <li><strong>Chalk:</strong> The favorite in a fight who has better odds at winning the fight. </li>
+                
+                <li><strong>Chalk Player:</strong> Someone who usually only plays the favored fighter, rarely betting on the underdogs.</li>
+                
+                <li><strong>Cashing out:</strong> This is when you remove money from a sportbook, usually via check or bank transfer.  Always ask your sportbook what kind of fees they have for cashing out, as some charge much more than others.</li>
+                
+                <li><strong>Conservative:</strong> Conservative bets are bets that are almost fail-proof.  Also called solid bets. Conservative bettors are people who make conservative bets almost exclusively, and have a small but steady profit margin when betting.</li>
+                </ul>
+                <div id="d" class="glossary-heading">D</div>
+                 <ul>
+                <li><strong>Data Mining:</strong> Searching through a large volume of statistics to find profitable situations to bet on in the future.</li>
+                
+                <li><strong>Dime:</strong> $1000 sports betting wager.</li>
+                
+                <li><strong>Dime:</strong> A line where the juice is 10 percent.</li>
+                
+                <li><strong>Dog:</strong> This is a short form for the underdog. The fighter perceived to be most likely to lose.</li>
+                
+                <li><strong>Dog Player:</strong> Someone who mostly plays the underdog.</li>
+                
+                <li><strong>Dollar:</strong> $100, in sports wagering.</li>
+                
+                <li><strong>Double Action:</strong> An “if bet” in sports betting that is processed if the precedent bet wins, ties or cancels.</li>
+                
+                <li><strong>Double Bet:</strong> A wager for twice the size of one’s usual wager; also known as ‘Double Pop’ or ‘Doubling Up’.</li>
+                </ul>
+                <div id="e" class="glossary-heading">E</div>
+                 <ul>
+                <li><strong>Edge:</strong> A persons advantage when it comes to sports betting.</li>
+                 
+                <li><strong>Even Money:</strong> The acronym for this is EVN. The bet whose odds are 1/1; a wager in which no vigorish or juice is laid.</li>
+                
+                <li><strong>Exotic:</strong> Any wager other than a straight bet or parlay – also called a ‘Prop’ or ‘Proposition’.</li>
+                
+                <li><strong>Exposure:</strong> The maximum amount of money a sports book stands to lose on a game.</li>
+                </ul>
+                <div id="f" class="glossary-heading">F</div>
+                 <ul>
+                <li><strong>Favorite:</strong> The fighter expected to win. The quoted odds reflect the extent to which the choice is favored.</li>
+                
+                <li><strong>Fifty Cents:</strong> A slang term for a $50 bet.</li>
+                
+                <li><strong>Flier:</strong> A bet on someone you think is more likely to lose than to win. This is done when a favorite is heavily overvalued, making a long shot bet on the underdog a potentially lucrative wager.</li>
+                </ul>
+                <div id="g" class="glossary-heading">G</div>
+                 <ul>
+                <li><strong>Gamble:</strong> To risk money on the outcome of an event.</li>
+                
+                <li><strong>Getting Down:</strong> Sports wagering meaning making a bet.</li>
+                </ul>
+                <div id="h" class="glossary-heading">H</div>
+                 <ul>
+                <li><strong>House:</strong> The casino, sports book, or bookmaker.</li>
+                
+                <li><strong>Half a Dollar:</strong> A slang term for a $50.00 bet.</li>
+                
+                <li><strong>Handicapper:</strong> One who studies, rates and wagers on sporting events.</li>
+                
+                <li><strong>Handicapping:</strong> The attempt to predict the outcome of events.</li>
+                
+                <li><strong>Handle:</strong> The total amount of bets taken.</li>
+                
+                
+                <li><strong>Hedge Fund:</strong> A hedge fund is an investment vehicle and a business structure that pools capital from a number of investors and invests in securities and other instruments.</li>
+                
+                <li><strong>Hedging:</strong> Placing wagers on the opposite fighter in order to cut losses or guarantee a minimum amount of winnings.</li>
+                
+                <li><strong>Hot fight:</strong> A fight which is drawing a lot of action on one side by knowledgeable handicappers.</li>
+                
+                <li><strong>Holding your own:</strong> Neither winning nor losing, just breaking even.</li>
+                </ul>
+                <div id="i" class="glossary-heading">I</div>
+                 <ul>
+                <li><strong>IBF:</strong> International Boxing Federation.</li>
+                
+                <li><strong>‘If’ bet:</strong> A wager that links together two straight bets, where progressing to the second bet is dependent on the first bet winning. If the first bet wins, the second bet is placed; if the first bet loses, however, the second bet isn’t placed.</li>
+                </ul>
+                <div id="j" class="glossary-heading">J</div>
+                 <ul>
+                <li><strong>Juice:</strong> The bookmaker’s commission, also known as “Vigorish.”</li>
+                </ul>
+                <div id="l" class="glossary-heading">L</div>
+                <ul>
+                <li><strong>Laying the Price:</strong> Betting the favorite by laying money odds.</li>
+                
+                <li><strong>Layoff:</strong> Money bet by a house with another bookmaker to reduce its liability.</li>
+                
+                <li><strong>Limit:</strong> The maximum amount of money a bookmaker will allow you to place on the fight.</li>
+                
+                <li><strong>Line:</strong> Another word for odds.</li>
+                
+                <li><strong>Linesmaker:</strong> The person who establishes the original and subsequent betting lines.</li>
+                
+                <li><strong>Lock:</strong> A term used to describe a fight where the favorite can’t possibly lose.  This is a term that serious bettors seldom use, as no fight at the mid to upper professional level will be a lock.</li>
+                
+                <li><strong>Line shopping:</strong> People with multiple sportbook accounts will place bets on the one with the best odds for certain fights.  Odds can vary wildly depending on when they’re released and how much money is being wagered.</li>
+                
+                <li><strong>Loose:</strong> Loose bets are bets that may or may not go through, but the pay out warrants a wager.  A loose bettor will often make many bets per event, in the hopes that the pay out of successful bets outweighs the loss from others.  These bettors tend to have wild swings in their bankroll, anywhere from crushing losses to ridiculous profits.  Loose bettors are also called value bettors.</li>
+                
+                <li><strong>Loose odds:</strong> Loose odds are when a line is farther apart than makes sense, with one being overvalued.  This leads to better pay out on underdogs.</li>
+                
+                <li><strong>Longshot:</strong> This is a fighter perceived to be unlikely to win.</li>
+                </ul>
+                <div id="m" class="glossary-heading">M</div>
+                <ul>
+                <li><strong>Money Line:</strong> Odds expressed in terms of money. So a moneyline of -145 means that for every $1.45 you bet, you would win $1.</li>
+                
+                <li><strong>Middle:</strong> To win both sides of the same contest in sports betting event. Wagering on the underdog at one line and the favorite at a different odd and winning both sides.</li>
+                
+                <li><strong>MMA:</strong> Mixed Martial Arts.</li>
+                </ul>
+                <div id="n" class="glossary-heading">N</div>
+                <ul>
+                <li><strong>Nickel:</strong> $500.00, in on a sports gambling wager.</li>
+                
+                <li><strong>Nickel Line:</strong> A sports wagering line where the juice is 5%.</li>
+                
+                <li><strong>No Action:</strong> A wager in which no money is lost nor won.</li>
+                </ul>
+                <div id="o" class="glossary-heading">O</div>
+                <ul>
+                <li><strong>Odds:</strong> Value express in number specified by the bookmaker which reflects what they think are the odds of a fighter winning.</li>
+                
+                <li><strong>Oddsmaker:</strong> Same as linesmaker. </li>
+                
+                <li><strong>Off the Board:</strong> A fight on which the bookmaker is not offering odds.</li>
+                
+                <li><strong>Opening Line:</strong> The earliest line posted for a particular event.</li>
+                
+                <li><strong>One dollar:</strong> A slang term for a $100.00 bet.</li>
+                
+                <li><strong>Outlaw line:</strong> Term for the earliest line in sports betting. This is an overnight line which only a handful of bettors are allowed to bet into.</li>
+                
+                <li><strong>Over:</strong> A wager in which a bettor predict that the fight will be above a specified total round.</li>
+                
+                <li><strong>Overvalued:</strong> This is when the favorite’s moneyline comes out to a higher percentage than what you feel they should be. This is a situation where you wouldn’t bet on that fighter, as the risk/pay out isn’t right for a bet.</li>
+                
+                <li><strong>Overlay:</strong> When the odds of a given wager favor the bettor rather than the house. </li>
+                </ul>
+                <div id="p" class="glossary-heading">P</div>
+                <ul>
+                <li><strong>Player:</strong> Same as bettor.</li>
+                
+                <li><strong>Parlay:</strong> A bet with two or more fighters in which all fighters must win or cover for the bettor to win and receive higher payouts.</li>
+                
+                <li><strong>Pick'em fight:</strong> A fight when neither fighter is favored.</li>
+                
+                <li><strong>Power Ratings:</strong> The strength of a fighter in comparison to another fighter.</li>
+                
+                <li><strong>Press:</strong> To wager a larger amount than usual.</li>
+                
+                <li><strong>Price:</strong> Sports betting term for the odds or point spread.</li>
+                
+                <li><strong>Proposition Bet:</strong> A specific wager predicting the exact outcome. For example hen you bet on a particular round when the fighter will end the fight. If you choose the round correctly, you get paid more than a normal bet.</li>
+                
+                <li><strong>Puppy:</strong> The underdog.</li>
+                
+                <li><strong>Push:</strong> When a fight ends with no winner or loser for wagering purposes. It’s market as a draw.</li>
+                
+                <li><strong>Pay out:</strong> The amount of profit you make on a bet.  Any time you win a bet, you have your initial bet returned to you, plus your pay out.</li>
+                
+                <li><strong>Postponed:</strong> An event that has been canceled and rescheduled for a later date. </li>
+                </ul>
+                <div id="r" class="glossary-heading">R</div>
+                <ul>
+                <li><strong>ROI (return on investment):</strong> the true measuring stick of a bettor's success.</li>
+                
+                <li><strong>Return:</strong> The total amount you are paid on a winning bet.</li>
+                
+                <li><strong>Run Down:</strong> This is all the lines for an specific date, sport, time, etc.</li>
+                
+                <li><strong>Runner:</strong> One who places bets for another when it comes to sports betting.</li>
+                
+                <li><strong>Round robin:</strong> A series of three or more teams in two-team parlays.</li>
+                </ul>
+                <div id="s" class="glossary-heading">S</div>
+                <ul>
+                <li><strong>Scout:</strong> Person who waits for what he thinks is an unusually strong wager.</li>
+                
+                <li><strong>Sharp:</strong> A sharp is a sophisticated or professional gambler.</li>
+                
+                <li><strong>Single Action:</strong> See straight bet.</li>
+                
+                <li><strong>Stake:</strong> The amount of the bet.</li>
+                
+                <li><strong>Sportsbook:</strong> A company or website that accepts bets.</li>
+                
+                <li><strong>Square:</strong> A novice when it comes to sports betting.</li>
+                
+                <li><strong>Sides:</strong> The names of the two teams playing - the underdog and the favorite.</li>
+                
+                <li><strong>Store:</strong> A bookie or sports betting establishment.</li>
+                
+                <li><strong>Straight Bet:</strong> A wager on the outcome of a single fight.</li>
+                
+                <li><strong>Systems:</strong> Using trends for the past that you are consistent with to predict future outcomes.</li>
+                
+                <li><strong>Square:</strong> A novice when it comes to sports betting.</li>
+                
+                <li><strong>Steam:</strong> When a line starts to move rapidly. Most “steam fights" do not necessarily reflect objective circumstances, but are fights that a mass a of bettors are drawn to for some reason.</li>
+                
+                <li><strong>Smart money:</strong> Sides that are bet on by more sharp handicappers.</li>
+                </ul>
+                <div id="t" class="glossary-heading">T</div>
+                <ul>
+                <li><strong>Ticket:</strong> A sports betting wager.</li>
+                
+                <li><strong>Tout:</strong> Someone who sells their expertise on sports wagering.</li>
+                
+                <li><strong>Trends:</strong> Using the past to predict the future focusing in on only one fighter.</li>
+                
+                <li><strong>Totals Bets:</strong> A proposition bet in which the bettor speculate that the total round will last more or less than the round posted by the sportsbook.</li>
+                
+                <li><strong>Taking the price:</strong> Betting the underdog and accepting money odds.</li>
+                
+                <li><strong>Teaser:</strong> A bet on two or more fighters where the line on each fighter is adjusted in the favor of the bettor. Like a parlay, all selections must be correct for the teaser to win.</li>
+                
+                <li><strong>Tight odds:</strong> Tight odds are when a line is very close together, often with both fighters having a negative number. Generally you want to avoid betting on tight fights, as the risk/pay out will be out of your range.  The opposite of this would be loose odds.</li>
+                </ul>
+                <div id="u" class="glossary-heading">U</div>
+                <ul>
+                <li><strong>UFC:</strong> Ultimate Fighting Championship</li>
+                
+                <li><strong>Under:</strong> An under is a wager in which the bettor guesses that the total round will be inferior to the round indicated.</li>
+                
+                <li><strong>Underdog:</strong> The fighter perceived to be most likely to lose. Also known as the ‘Dog’ in sports betting terminology.</li>
+                
+                <li><strong>Undervalued:</strong> This is when the favorite’s moneyline comes out to a lower percentage than what you feel they should be.  This is a situation where you’d want to bet on that fighter, as the risk/pay out makes it a valuable bet.</li>
+                
+                <li><strong>Unit(s):</strong> A unit of measure to describe 2% of your bankroll.  This is often represented as a number followed by a lower case “u” such as 4u.  This allows bettors to recommend wagers or discuss their bets without saying how much money is actually involved.</li>
+                </ul>
+                <div id="v" class="glossary-heading">V</div>
+                <ul>
+                <li><strong>Value:</strong> In sports betting value means getting the best odds on a wagering proposition; the highest possible edge.</li>
+                
+                <li><strong>Vigorish:</strong> The bookmaker’s commission on a losing bet; also known as “juice”.</li>
+                </ul>
+                <div id="w" class="glossary-heading">W</div>
+                <ul>
+                <li><strong>Wager:</strong> To risk money on the outcome of an event, to bet.</li>
+                
+                <li><strong>Wise Guy:</strong> Also known as a sharp, a wise guy is a well-informed or knowledgeable handicapper or bettor.</li>
+                
+                <li><strong>WBA:</strong> World Boxing Association. </li>
+                
+                <li><strong>WBC:</strong> World Boxing Council.</li>
+                
+                <li><strong>Wood:</strong> The price of a heavy favorite. For example, if you bet Georges St-Pierre as a -240 favorite, you “lay the wood” with GSP.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+{% endblock %}
+

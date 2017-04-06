@@ -1,0 +1,115 @@
+{% extends "base.html" %}    
+{% load url from future %}
+{% load bookmaker_filters %}
+{% load app_filters %}
+{% load staticfiles %}
+{% block title %}{{article.title}} | Bet on Combat{% endblock %}
+{% block fb_title %}{{article.title}} | Bet on Combat{% endblock %}
+{% block fb_img %}{{ article.image.url }}{% endblock %}
+{% block fb_description %}{{article.content|striptags|truncatechars:255}}{% endblock %}
+{% block nav-predictions %}<a href="{% url 'news:index' %}" class="active">News</a>{% endblock %}
+{% load mptt_tags %}
+{% block maincontent %}
+{% load i18n %}
+{% block scripts %}
+<script src="{% static "js/show_reply_div.js" %}"></script>
+<script src="{% static "js/social-share-kit.min.js" %}"></script>
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/social-share-kit.css" %}"/>
+{% endblock %}
+<section>
+    <div class="section-header">
+        <h2>{{ article.title }}</h2>
+       <br>
+       Written by <a href="{% url 'userprofile:profile_display' article.author.username  %}">{{article.author.first_name}} {{article.author.last_name}}</a> aka <a href="{% url 'userprofile:profile_display' article.author.username  %}">{{article.author.username}}</a>  -
+       <br>
+       <br>
+       <div class="ssk-group">
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{request.get_host}}{% url 'news:article' article.slug %}" target="_blank" class="ssk ssk-text ssk-facebook ssk-xs" data-ssk-ready="true">Share</a>
+          <a href="http://twitter.com/intent/tweet?url={{request.get_host}}{% url 'news:article' article.slug %}&text={{request.get_host}}{% url 'news:article' article.slug %}" target="_blank" class="ssk ssk-text ssk-twitter ssk-xs" data-ssk-ready="true">Tweet</a>
+          <a href="mailto:?Subject=Betoncombat.com&amp;Body=Check out this {{request.get_host}}{% url 'news:article' article.slug %}" target="_blank" class="ssk ssk-text ssk-email ssk-xs" data-ssk-ready="true">Mail To</a>
+      </div>
+    </div>
+
+    <div class="section-body">
+        {% if article.image %}
+        <div class="article-image text-center">
+          <p>
+          <img src="{{ article.image.url }}" alt="{{ article.title }}" class="left" />
+          </p>
+        </div>
+        {% endif %}
+        <div class="article-content">
+            {{ article.content|safe }}
+            {% wide_banner %}
+        </div>
+    </div>
+</section>
+<section>
+    <div class="section-body comment-section-body">
+         <div>
+             <table style = "width: 100%">
+                 <td><h3><strong>Comments</strong></h4></td>
+                <td align="right">{{comments_number}} Comments</td>
+              </tr>
+            </table>
+        </div>
+        <hr class="divider">
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+        {% if user.is_authenticated %}
+        <form class="form-inline" method="post" action = {% url 'news:comment' article.slug %}>
+            {% csrf_token %}
+            <div class="form-actions text-left">
+                {{PostForm.content}}
+                {{PostForm.comment_replies}}
+            </div>
+            <div class="form-actions text-left">
+                <button type="submit"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Post">Submit</button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+<hr>
+        {% recursetree comments %} 
+        <div class="mdl-grid comment_div">
+            <div class="mdl-cell mdl-cell--12-col">
+        <p> {{ node.content }}</p>
+        <p>by <strong>{{ node.commented_by }}</strong> on <strong>{{ node.date_commented }}</strong>{% if user.is_authenticated %}&nbsp;&nbsp;<i class="fa fa-reply reply_button" id="{{node.id}}">&nbsp;reply</i>{% endif %}</p>
+        {% if user.is_authenticated %}
+        <div class="reply_div div_no_{{node.id}}">
+        <form class="form-inline" method="post" action = {% url 'news:comment_replies' article.slug node.id  %}>
+            {% csrf_token %}
+            <div class="form-actions text-left">
+                {{PostForm.content}}
+            </div>
+            <div class="form-actions text-left">
+                <button type="submit"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Post">Submit</button>
+            </div>
+        </form>
+        </div>
+        {% endif %}
+    </div>
+    </div>
+        {% if not node.is_leaf_node %}
+        <div class="comment_reply">
+        <p> {{ children }}</p>
+        </div>
+        {% endif %}
+        {% endrecursetree %}
+        <hr class="divider">
+        {% if not user.is_authenticated %}
+        <div class="join_con_div">
+            <h4 class="text-center"> Join the conversation!
+                <div></div>
+            <a class="mdl-navigation__link" href="{% url 'account_login' %}">Login</a>
+            or
+            <a class="mdl-navigation__link" href="{% url 'account_signup' %}">Sign up</a>
+            </h4>
+        </div>
+{% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block head-scripts %}
+<script src="http://code.highcharts.com/highcharts.src.js"></script>
+<script src="{% static "js/highcharts-ng-master/dist/highcharts-ng.min.js" %}"></script>
+{% endblock %}
+{% load url from future %}
+{% block title %}Odds | Bet on Combat{% endblock %}
+{% block fb_title %}Odds | Bet on Combat{% endblock %}
+{% block fb_description %}Combat sports betting odds.{% endblock %}
+{% block fb_img %}{% endblock %}
+{% block nav-odds-class %}active{% endblock %}
+{% block nav-odds-class-mobile %}active{% endblock %}
+
+{% block maincontent %}
+
+{% verbatim %}
+<section class="section-large" ng-app="odds"  class="container" id="odds" data-ng-cloak>
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect"  data-ng-view data-ng-controller="OddsController">
+        <ng-include src="'/static/html/_parlay_container.html'"></ng-include>
+        <ng-include src="'/static/html/_odds_history_container.html'"></ng-include>
+        <div id="header">
+            <h2>
+                Odds   
+            </h2>
+            <ng-include src="'/static/html/_odds_options.html'"></ng-include>
+        </div>
+    
+        <div class="mdl-tabs__tab-bar">
+              <a href="#mma-panel" class="mdl-tabs__tab is-active">MMA</a>
+              <a href="#boxing-panel" class="mdl-tabs__tab">Boxing</a>
+        </div>
+        <div class="mdl-tabs__panel is-active" id="mma-panel">
+            <div data-ng-repeat="month in months" class="clearfix">
+                <h3>{{month.month}}</h3>
+                <div data-ng-repeat="event in month.events">
+                            
+                    <div class="event-date">{{event.date}}</div>
+                    <h4 class="event-name">
+                        <a href="{{event.slug}}">{{event.name}}</a>
+                        <em class="last-updated">Last Updated: {{lastUpdated(event.last_updated)}}</em>
+                    </h4>
+                    <ng-include src="'/static/html/_odds_table.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+    
+        <div class="mdl-tabs__panel" id="boxing-panel">
+            
+        </div>
+    </div>
+</section>
+
+{% endverbatim %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+var months = JSON.parse('{{months|escapejs}}');
+var event_odds = null;
+</script>
+<script src="/static/js/odds.filters.js"></script>
+<script src="/static/js/odds.directives.js"></script>
+<script src="/static/js/odds.controllers.js"></script>
+{% endblock %}
+  

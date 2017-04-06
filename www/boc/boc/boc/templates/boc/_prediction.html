@@ -1,0 +1,17 @@
+
+<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--6-col-phone"> 
+    <a href="{{prediction.get_absolute_url}}" title="{{ prediction.title }}" rel="bookmark">
+        <div class="grid-list">
+            <div class="header">
+                {{prediction.title}}
+            </div>
+            {% if prediction.image %}
+            <img src="/media/{{prediction.image}}" alt="{{ prediction.title }}"/>
+            {% endif %}
+            <div class="footer">
+                <span class="color-gold">Total Predictions: {{prediction.prediction_set.all|length}}</span>
+                <div>{{prediction.timestamp}}</div>
+            </div>
+        </div>
+    </a>
+</div>

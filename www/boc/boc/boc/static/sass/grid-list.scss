@@ -1,0 +1,37 @@
+.grid-list{
+  position:relative;
+  height:250px;
+  overflow:hidden;
+  background-color:black;
+  &:hover{
+    .header{
+      padding:18px;
+      
+    }
+  }
+  .header{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    padding:16px;
+    color:white;
+    background-color:rgba(0,0,0,0.5);
+    font-size:16px;    
+    transition: all 0.2s ease;
+  }
+  img{
+    width:100%;
+    text-align:center;
+  }
+  .footer{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:16px;
+    color:white;
+    overflow:hidden;
+    background-color:rgba(0,0,0,0.7);
+  }
+}

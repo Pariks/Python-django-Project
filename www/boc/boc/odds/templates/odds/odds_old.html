@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% block title %}Odds | Bet on Combat{% endblock %}
+{% block fb_title %}Odds | Bet on Combat{% endblock %}
+{% block fb_description %}Combat sports betting odds.{% endblock %}
+{% block fb_img %}{% endblock %}
+{% block nav-odds %}<a href="{% url 'odds:index' %}" class="active">Odds</a>{% endblock %}
+
+{% block maincontent %}
+<div class="container">
+    <div id="full-odds-widget"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+<script src="http://www.fightbetnetwork.com/js/fullwidget.js" type="text/javascript"></script>
+<!--
+<script src="http://localhost:8888/js/fullwidget.js" type="text/javascript"></script>
+-->
+{% endblock %}
+  

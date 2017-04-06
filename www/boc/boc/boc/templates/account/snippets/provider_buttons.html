@@ -1,0 +1,8 @@
+<div class="btn-1">
+{% load socialaccount %}
+{% for provider in socialaccount.providers %}
+    <a class="btn btn btn-md btn-{{provider.id}} btn-social" href="{% provider_login_url provider.id process='login' %}">
+        <img class="pull-left" src="/static/account/img/{{provider.id}}_logo.png" alt="{{provider.name}} Logo"/><span>{{provider.name}}</span>
+    </a>
+{% endfor %}
+</div>

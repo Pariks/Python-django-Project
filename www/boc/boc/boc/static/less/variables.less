@@ -1,0 +1,160 @@
+// Base Variables
+
+
+
+@box-bg-color: rgb(253,253,253);
+@text-color: rgb(52,73,94);
+@title-bg-color: darken(@bg-color, 14%);
+@text-link-color: @color-2;
+
+//Background Colors
+@bg-color: #f2f2f2;
+@section-bg-color: rgb(236,240,241);
+
+//Theme Colors
+@color-1: rgb(52,62,73); //Blue
+@color-1: rgb(44,62,80); //Midnight Blue
+@color-2: rgb(192,57,43); //Red
+@color-3: rgb(169,176,188); //Gray
+
+@color-1-hover: lighten(@color-1, 15%);
+@color-2-hover: lighten(@color-2, 15%);
+@color-3-hover: darken(@color-3, 15%);
+
+@color-dark: @color-1;
+@color-medium: @color-2;
+@color-light: @color-3;
+
+@color-dark-hover: @color-1-hover;
+@color-medium-hover: @color-2-hover;
+@color-light-hover: @color-3-hover;
+
+@text-color-light: rgb(255,255,255);
+@text-color-medium: rgb(189,195,199);
+@text-color-dark: rgb(52,73,94);
+
+@text-color-light-hover: darken(@text-color-light, 20%);
+@text-color-medium-hover: lighten(@text-color-medium, 20%);
+@text-color-dark-hover: lighten(@text-color-dark, 20%);
+
+@facebook-color: rgb(59,87,157);
+@google-color: rgb(209,92,65);
+@twitter-color: rgb(65,176,234);
+
+// Navbar
+
+@navbar-bg-color: @color-1;
+@navbar-accent-color: @color-2;
+@navbar-link-text-color: @text-color-medium;
+@navbar-link-text-color-hover: @text-color-medium-hover;
+@navbar-collapse-border-color: @color-3;
+@navbar-link-border-width: 4px;
+
+@navbar-height: 50px;
+@navbar-fontsize: 12px;
+@navbar-toggle-border-color:rgb(169,176,188);
+
+// Scaffolding
+
+@html-width: 320px;
+@box-border-width: 0;
+@main-padding: 0;
+@main-padding-top-fixed: @navbar-height + @box-border-width;
+@section-padding: 15px;
+
+
+// Typography
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+@font-family-sans-serif:"Open Sans", "Lato", Helvetica, Arial, sans-serif;
+
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic);
+@font-family-serif:'Droid Serif', serif;
+
+// Components
+
+@border-radius-base:        0;
+
+// Z-index master list
+//** Warning: Avoid customizing these values. They're used for a bird's eye view
+//** of components dependent on the z-axis and are designed to all work together.
+
+@zindex-navbar-fixed:      1030;
+@zindex-modal:             1050;
+@zindex-pullout:           1020;
+@zindex-aside:             1010;
+
+// Media queries breakpoints
+
+// Extra small screen / phone
+
+@screen-xs-min:           480px;
+
+// Small screen / tablet
+
+@screen-sm-min:           768px;
+@screen-smmd-min:         890px;
+
+// Medium screen / desktop
+
+@screen-md-min:           992px;
+@screen-mdlg-min:         1060px;
+
+// Large screen / wide desktop
+
+@screen-lg-min:           1200px;
+
+// Maximums for screens
+@screen-xs-max:              (@screen-sm-min - 1);
+@screen-sm-max:              (@screen-md-min - 1);
+@screen-md-max:              (@screen-lg-min - 1);
+
+// Grid system
+
+// Padding between columns. Gets divided in half for the left and right.
+
+@grid-gutter-width:         30px;
+
+// Navbar collapse
+
+// Point at which the navbar becomes uncollapsed.
+@grid-float-breakpoint:     @screen-sm-min;
+
+// Point at which the navbar begins collapsing.
+
+@grid-float-breakpoint-max: (@grid-float-breakpoint - 1);
+
+// Basics of a navbar
+
+@navbar-height:                    50px;
+@navbar-margin-bottom:             0;
+@navbar-border-radius:             @border-radius-base;
+
+
+
+// Colors
+
+@text-color: rgba(0,0,0,0.8);
+@section-bg-color: white;
+@section-header-bg-color: #252525;
+@color-gold: #a77a3f;
+@navbar-bg-color: #3b3c43;
+@navbar-bg-color: rgb(26, 27, 31);
+@navbar-bg-color: black;
+@navbar-border-color: rgb(42,42,42);
+@navbar-bg-color-hover: rgb(32, 33, 37);
+@border-color: @navbar-bg-color-hover;
+@footer-bg-color: black;
+
+@navbar-height: 100px;
+@bg-color: #f2f2f2;
+
+@screen-lg-min: 1300px;
+@color-pending: gray;
+@color-win: rgb(38, 166, 91);
+@color-loss: rgb(207, 0, 15);
+@color-push: blue;
+
+
+// Entries
+@entry-bg-color: rgb(26, 27, 31);

@@ -1,0 +1,68 @@
+<script>
+   var userAuthenticated = "{{user.is_authenticated}}";
+   var csrfToken = "{{ csrf_token }}";
+   var username = "{{user.username}}";
+   var soundOn = "{{user.chat_sound}}";
+</script>
+{% verbatim %}
+<div ng-app="chat"  data-ng-cloak>
+    <div  data-ng-view data-ng-controller="ChatController">
+        
+        <div id="chat-button"  class="mdl-shadow--2dp" data-ng-click="showHideChatWidget()">
+            <span class="material-icons mdl-badge chat-icon" data-badge="{{newMessage}}" data-ng-show="newMessage > 0">
+                <i class="fa fa-comments-o"></i>
+            </span>
+            <i class="fa fa-comments-o" data-ng-show="newMessage === 0"></i>
+        </div>
+    
+        <div id="chat-window" class="mdl-shadow--2dp" data-ng-show="showChatWidget">
+            <div id="chat-header" class="text-center">
+                <a class="mdl-button  mdl-js-button mdl-js-ripple-effect" href="/chat/">Enter Chat Room</a>
+                
+                <div class="pull-right sound-button" data-ng-if="userAuthenticated" data-ng-click="toggleSound()">
+                    <i data-ng-show="!soundOn" class="fa fa-volume-off"></i>
+                    <i data-ng-show="soundOn" class="fa fa-volume-up"></i>
+                </div>
+                
+            </div>
+            <div data-ng-show="userAuthenticated">
+                <div id="messages-container">
+                    <div class="message-container" id="{{message.id}}" data-ng-repeat="message in messages">
+                        <div class="message {{message.username}}">
+                            <div class="username">
+                                {{ message.username }}
+                                <span class="timestamp">
+                                    {{getTimestamp(message.timestamp)}}
+                                </span>
+                            </div>
+                            <div class="text"> 
+                                {{ message.body }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="message-form-container" data-ng-submit="submitMessage()">
+                   <form id="message-form">
+                       <div class="message-form-input-container">
+                            <input type="text" data-ng-model="message"/>
+                       </div>
+                        <input id="message-submit" type="submit" value="SEND"/>
+                    </form>
+                </div>
+            </div>
+            <div id="signup-container" class="text-center" data-ng-show="!userAuthenticated">
+                Create a FREE account to use the Chat.<br/><br/>
+                <div class="text-center">
+                <a class="mdl-button mdl-button--accent mdl-button--raised mdl-js-button mdl-js-ripple-effect" href="/accounts/signup" class="btn btn-gold-empty">Create Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endverbatim %}
+
+<style>
+.{{user.username}}{
+    margin-left:10%;
+}
+</style>

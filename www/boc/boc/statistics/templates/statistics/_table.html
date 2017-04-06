@@ -1,0 +1,38 @@
+{% load humanize %}
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+          <colgroup>
+            <col style="width:10%">
+            <col style="width:10%">
+            <col style="width:10%">
+            <col style="width:10%">
+            <col style="width:15%">
+            <col style="width:15%">
+            <col style="width:15%">
+            <col style="width:15%">
+          </colgroup>  
+        <thead>
+            <th class="mdl-data-table__cell--non-numeric">{{category}}</th>
+            <th>Win</th>
+            <th>Loss</th>
+            <th>Accuracy</th>
+            <th>Risk</th>
+            <th>Profit</th>
+            <th>ROI</th>
+            <th>Fund</th>
+        </thead>
+        <tbody>
+            {% for statistic in statistics %}
+             <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{statistic.category}}</td>
+                <td>{{statistic.win}}</td>
+                <td>{{statistic.loss}}</td>
+                <td>{{statistic.accuracy}}%</td>
+                <td >${{statistic.total_risk|intcomma}}</td>
+                <td>+${{statistic.profit|intcomma}}</td>
+                <td>{{statistic.roi}}%</td>
+                <td>${{statistic.fund|intcomma}}</td>
+             </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+

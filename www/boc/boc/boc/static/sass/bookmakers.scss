@@ -1,0 +1,95 @@
+.bookmakers{
+  .bookmaker-container{
+    margin-bottom:30px;
+    border-bottom:1px solid $divider-color;
+    padding-bottom:14px;
+  }
+  .banner-container{
+    margin-right:20px;
+    width:100%;
+    text-align:center;
+    @media (min-width: $breakpoint-mobile-tablet) {
+     width:auto;
+    }
+  }  
+  
+  
+  .content-container{
+    float:left;
+    width:100%;
+    @media (min-width: $breakpoint-mobile-tablet) {
+      overflow:hidden;
+      width:auto;
+      float:none;
+    }
+    
+    .bookmaker-name{
+      margin-top:0;
+      margin-bottom:15px;
+      font-size: 30px;
+      line-height:1;
+    }
+  }
+  
+  .bookmaker-table{
+    float:left;
+    white-space:normal;
+    @media (min-width: $breakpoint-tablet) {
+      white-space:nowrap;
+    }
+    tr{
+      height:41px;
+      td{
+        height:41px;
+        padding-top:5px;
+        padding-left:5px;
+        padding-right:5px;
+        vertical-align:middle;
+        @media (min-width: $breakpoint-tablet) {
+          padding-left:18px;
+          padding-right:18px;
+        }
+        &:first-of-type{
+          padding-left:5px;
+          width:30%;
+          @media (min-width: $breakpoint-tablet) {
+            padding-left:24px;
+            width:auto;
+          }
+        }
+      }
+    }
+  }
+  
+  .bookmaker-container{
+    .bookmaker-table{
+      tr{
+        height:34px;
+        td{
+          height:34px;
+          padding-top:4px;
+        }
+      }
+    }
+  }
+}
+
+
+.banner{
+  text-align:center;
+  margin:10px 0;
+  .banner-desktop{
+    display:none;
+     @media (min-width: $breakpoint-mobile) {
+      display:block;
+    }
+  }
+  
+  .banner-mobile{
+    display:block;
+     @media (min-width: $breakpoint-mobile) {
+      display:none;
+    }
+  }
+ 
+}

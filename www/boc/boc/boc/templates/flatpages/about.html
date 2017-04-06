@@ -1,0 +1,535 @@
+{% extends "base.html" %}
+{% block title %}About | Bet on Combat{% endblock %}
+{% load url from future %}
+{% load i18n staticfiles %}
+{% block fb_title %}About | Bet on Combat{% endblock %}
+{% block fb_description %}Bet on Combat's philosophy is to provide an economy proof investment alternative to traditional products such as stocks, bonds, real estate and other “traditional” investment vehicles and asset classes. Bet on Combat Investment Fund strives to be the most transparent and accurate source of value-bet combat sports prediction{% endblock %}
+{% block fb_img %}{% endblock %}
+
+
+{% block maincontent %}
+<style type="text/css">
+.post-container {
+    margin: 20px 20px 0 0;
+    overflow: auto
+}
+.post-thumb {
+    float: left
+}
+.post-thumb img {
+    display: block
+}
+.post-content {
+    margin-left: 210px
+}
+.post-title {
+    font-weight: bold;
+    font-size: 200%
+</style>
+<section class="mdl-shadow--2dp">
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect" ng-app="statistics" data-ng-cloak  data-ng-view data-ng-controller="StatisticsController">
+      <h2>
+        About
+        </h2>
+      <div class="mdl-tabs__tab-bar">
+         <a {% if is_active_flag == 1 %} class="mdl-tabs__tab is-active" {% else %} class="mdl-tabs__tab" {% endif %} href="#founder-panel">Word From the Founder</a>
+         <a class="mdl-tabs__tab" href="#brand-panel">The Brand</a>
+         <a {% if is_active_flag == 2 %} class="mdl-tabs__tab is-active" {% else %} class="mdl-tabs__tab" {% endif %}  href="#fund-panel">The Fund</a>
+         <a class="mdl-tabs__tab" href="#philosophy-panel">Philosophy</a>
+         <a {% if is_active_flag == 3 %} class="mdl-tabs__tab is-active" {% else %} class="mdl-tabs__tab" {% endif %} href="#advisory-panel">Advisory Board</a>
+         <a class="mdl-tabs__tab" href="#faq-panel">FAQ</a>
+      </div>
+
+      <div {% if is_active_flag == 1 %} class="mdl-tabs__panel is-active" {% else %} class="mdl-tabs__panel" {% endif %} id="founder-panel">
+            <h4>{{founder.title}}</h4>
+            {{founder.content|safe}}
+      </div>
+      <div class="mdl-tabs__panel" id="brand-panel">
+            <h4>{{brand.title}}</h4>
+            {{brand.content|safe}}
+      </div>
+      <div {% if is_active_flag == 2 %} class="mdl-tabs__panel is-active" {% else %} class="mdl-tabs__panel" {% endif %} id="fund-panel">
+            <h4>{{fund.title}}</h4>
+            {{fund.content|safe}}
+            <div class="text-center">
+                 <a href="{% url 'investor:index' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">
+                APPLY NOW
+                </a>
+
+
+            </div>
+      </div>
+      <div class="mdl-tabs__panel" id="philosophy-panel">
+            <h4>{{philosophy.title}}</h4>
+            {{philosophy.content|safe}}
+           <div class="table-responsive">
+            <div class="table-responsive">
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                      <colgroup>
+                        <col style="width:25%">
+                        <col style="width:25%">
+                        <col style="width:25%">
+                        <col style="width:25%">
+                      </colgroup>
+                    <thead>
+                        <th class="mdl-data-table__cell--non-numeric">Year</th>
+                        <th>Bet on Combat</th>
+                        <th>Dow Jones</th>
+                        <th>S&P 500</th>
+                    </thead>
+                    <tbody>
+                        {% for statistic in rate_of_return_statistics %}
+                         <tr>
+                            <td class="mdl-data-table__cell--non-numeric">{{statistic.year}}</td>
+                            <td>{{statistic.boc}}%</td>
+                            <td>{{statistic.dow}}%</td>
+                            <td>{{statistic.sp}}%</td>
+                         </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+         <highchart id="rate-of-return" config="rateOfReturnStatisticsChart"></highchart>
+
+      </div>
+
+      <div {% if is_active_flag == 3 %} class="mdl-tabs__panel is-active" {% else %} class="mdl-tabs__panel" {% endif %} id="advisory-panel">
+            <h4>{{advisory.title}}</h4>
+             <p>{{advisory.content|safe}}</p>
+            {%for advisor in advisors%}
+            <hr class="divider">
+            <div class="clearfix">
+                 <div class="pull-left banner-container">  <img {%if advisor.image %}src="{{advisor.image.url}}" {% endif %} alt="{{advisor.title }}" width="200" height="200"> </div>
+                 <div class="content-container">
+                 <h4 class="post-title">{{advisor.title}}</h4>
+                 <p>{{advisor.content|safe}}</p>
+
+                 </div>
+            </div>
+            {%endfor%}
+      </div>
+
+      <div class="mdl-tabs__panel" id="faq-panel">
+            <h4>{{faq.title}}</h4>
+            {{faq.content|safe}}
+      </div>
+
+
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+var yearlyStatistics = JSON.parse('{{yearly_statistics_graph|escapejs}}');
+var monthlyStatistics = JSON.parse('{{monthly_statistics_graph|escapejs}}');
+var rateOfReturnStatistics = JSON.parse('{{rate_of_return_statistics_graph|escapejs}}');
+var dogFaveStatistics = JSON.parse('{{dog_fave_profit_graph|escapejs}}');
+
+var statistics = angular.module('statistics', ['ui.bootstrap', 'highcharts-ng']);
+
+statistics.controller('StatisticsController', function($scope, $filter) {
+
+    var createChart = function(series, yAxis, xAxis){
+        var chartConfig = {
+            options: {
+                chart : {
+                    spacingLeft: 1,
+                    spacingBottom:5,
+                    spacingTop:25,
+                    zoomType: 'x',
+                    resetZoomButton: {
+                        position: { x: 0, y: -24 }
+                    },
+                    style: {
+                        fontFamily: 'Helvetica'
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    enabled:true
+                },
+                legend:{
+                    enabled:true
+                },
+                plotOptions: {
+                    series: {
+                        marker: {
+                            states: {
+                                hover: {
+                                    enabled: false
+                                }
+                            }
+                        }
+                    },
+                    line: {
+                        color: 'black'
+                    }
+                },
+            },
+            series: series,
+
+            title: {
+                text: ''
+            },
+            xAxis: xAxis,
+            yAxis: yAxis,
+
+            loading: false
+        }
+
+        return chartConfig;
+    }
+
+    $scope.yearlyStatistics = yearlyStatistics.reverse();
+    $scope.yearlyData = {profit:[], risk:[]};
+    var yearlyCategories = [];
+    for(var i=0; i<$scope.yearlyStatistics.length; i++){
+        $scope.yearlyData.profit.push([$scope.yearlyStatistics[i].category, $scope.yearlyStatistics[i].profit]);
+        $scope.yearlyData.risk.push([$scope.yearlyStatistics[i].category, $scope.yearlyStatistics[i].total_risk]);
+        yearlyCategories.push($scope.yearlyStatistics[i].category);
+    }
+    var yearlySeries = [
+        {
+            data: $scope.yearlyData.profit,
+            name: 'Profit',
+            type: 'line',
+            color: '#a77a3f',
+            lineWidth: 2,
+            marker:{enabled:false}
+        },{
+            data: $scope.yearlyData.risk,
+            name: 'Risk',
+            type: 'line',
+            lineWidth: 2,
+            marker:{enabled:false}
+        }
+    ];
+    var yearlyYAxis = {
+                showFirstLabel:true,
+                showLastLabel:true,
+                maxPadding: 0.0,
+                minPadding: 0.0,
+
+
+                labels: {
+                    y:5,
+                    x:-5,
+                    align:'right',
+                    style: {
+                        fontSize: 12
+                    },
+                    format: '${value}'
+                },
+
+                title: {
+                    text: ''
+                }
+        };
+    var yearlyXAxis = {
+                labels: {
+                    style: {
+                        fontSize: 12
+                    }
+                },
+                categories: yearlyCategories,
+                lineColor:'gray'
+        };
+    $scope.yearlyStatisticsChart = createChart(yearlySeries, yearlyYAxis, yearlyXAxis);
+
+
+    $scope.monthlyStatistics = monthlyStatistics.reverse();
+    $scope.monthlyData = {profit:[], risk:[]};
+    var monthlyCategories = [];
+    for(var i=0; i<$scope.monthlyStatistics.length; i++){
+        $scope.monthlyData.profit.push([$scope.monthlyStatistics[i].category, $scope.monthlyStatistics[i].profit]);
+        $scope.monthlyData.risk.push([$scope.monthlyStatistics[i].category, $scope.monthlyStatistics[i].total_risk]);
+        monthlyCategories.push($scope.monthlyStatistics[i].category);
+    }
+    var monthlySeries = [
+        {
+            data: $scope.monthlyData.profit,
+            name: 'Profit',
+            type: 'line',
+            lineWidth: 2,
+            color: '#a77a3f',
+            marker:{enabled:false}
+        },{
+            data: $scope.monthlyData.risk,
+            name: 'Risk',
+            type: 'line',
+            lineWidth: 2,
+            marker:{enabled:false}
+        }
+    ];
+    var monthlyYAxis = {
+                showFirstLabel:true,
+                showLastLabel:true,
+                maxPadding: 0.0,
+                minPadding: 0.0,
+
+
+                labels: {
+                    y:5,
+                    x:-5,
+                    align:'right',
+                    style: {
+                        fontSize: 12
+                    },
+                    format: '${value}'
+                },
+
+                title: {
+                    text: ''
+                },
+        };
+    var monthlyXAxis = {
+            categories: monthlyCategories,
+            labels: {
+                style: {
+                    fontSize: 12
+                }
+            },
+                lineColor:'gray'
+        };
+    $scope.monthlyStatisticsChart = createChart(monthlySeries, monthlyYAxis, monthlyXAxis);
+
+
+    $scope.rateOfReturnStatistics = rateOfReturnStatistics;
+    var rateOfReturnData = {boc:[], dow:[], sp:[]};
+    var rateOfReturnCategories = [];
+    for(var i=0; i< $scope.rateOfReturnStatistics.length; i++){
+        rateOfReturnData.boc.push([ $scope.rateOfReturnStatistics[i].year,  $scope.rateOfReturnStatistics[i].boc]);
+        rateOfReturnData.dow.push([ $scope.rateOfReturnStatistics[i].year,  $scope.rateOfReturnStatistics[i].dow]);
+        rateOfReturnData.sp.push([ $scope.rateOfReturnStatistics[i].year,  $scope.rateOfReturnStatistics[i].sp]);
+        rateOfReturnCategories.push( $scope.rateOfReturnStatistics[i].year);
+    }
+    var rateOfReturnSeries = [
+        {
+            data: rateOfReturnData.boc,
+            name: 'Bet on Combat',
+            type: 'line',
+            lineWidth: 2,
+            color: '#a77a3f',
+            marker:{enabled:false}
+        },{
+            data: rateOfReturnData.dow,
+            name: 'Dow Jones',
+            type: 'line',
+            lineWidth: 2,
+            marker:{enabled:false}
+        },{
+            data: rateOfReturnData.sp,
+            name: 'S&P 500',
+            type: 'line',
+            lineWidth: 2,
+            marker:{enabled:false}
+        }
+    ];
+    var rateOfReturnYAxis = {
+                showFirstLabel:true,
+                showLastLabel:true,
+                maxPadding: 0.0,
+                minPadding: 0.0,
+
+                labels: {
+                    y:5,
+                    x:-5,
+                    align:'right',
+                    style: {
+                        fontSize: 12
+                    },
+                    format: '{value}%'
+                },
+
+                title: {
+                    text: ''
+                },
+        };
+    var rateOfReturnXAxis = {
+            categories: monthlyCategories,
+            labels: {
+                style: {
+                    fontSize: 12
+                }
+            },
+            lineColor:'gray'
+        };
+
+    $scope.rateOfReturnStatisticsChart = createChart(rateOfReturnSeries, rateOfReturnYAxis, rateOfReturnXAxis);
+
+
+    $scope.dogFaveStatistics = dogFaveStatistics;
+    console.log($scope.dogFaveStatistics)
+
+    $scope.dogFavePieChart = {
+            options: {
+                chart : {
+                    spacingLeft: 1,
+                    spacingBottom:5,
+                    spacingTop:25,
+                    zoomType: 'x',
+                    resetZoomButton: {
+                        position: { x: 0, y: -24 }
+                    },
+                    type: "pie",
+                    style: {
+                        fontFamily: 'Helvetica'
+                    },
+                    borderColor: 'black'
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    enabled:true
+                },
+                legend:{
+                    enabled:true
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+            },
+            series: [{
+                name: "Profit",
+                colorByPoint: true,
+                data: [{
+                        name: "Underdogs",
+                        y: $scope.dogFaveStatistics.underdog.profit,
+                        color: '#a77a3f'
+                    }, {
+                        name: "Favorites",
+                        y: $scope.dogFaveStatistics.favourite.profit,
+                        color: '#424242'
+                    }
+                ],
+                tooltip:{
+                    pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>${point.y}</b><br/>'
+                }
+            }],
+
+            title: {
+                text: ''
+            },
+
+            loading: false
+        }
+
+        $scope.dogFaveColumnChart = {
+            options: {
+                chart : {
+                    spacingLeft: 1,
+                    spacingBottom:5,
+                    spacingTop:25,
+                    zoomType: 'x',
+                    resetZoomButton: {
+                        position: { x: 0, y: -24 }
+                    },
+                    type: "column",
+                    style: {
+                        fontFamily: 'Helvetica'
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    enabled:true
+                },
+                legend:{
+                    enabled:false
+                },
+
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+            },
+            series: [{
+                name: "Profit",
+                colorByPoint: true,
+                data: [{
+                        name: "Underdogs",
+                        y: $scope.dogFaveStatistics.underdog.profit,
+                        color: '#a77a3f',
+
+
+                    }, {
+                        name: "Favorites",
+                        y: $scope.dogFaveStatistics.favourite.profit,
+                        color: '#424242'
+                    }
+                ],
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(){
+                        console.log(this);
+                        return this.percentage;
+                    }
+                },
+                tooltip:{
+                    pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>${point.y}</b><br/>'
+                }
+            }],
+
+            title: {
+                text: ''
+            },
+
+            yAxis: {
+                showFirstLabel:true,
+                showLastLabel:true,
+                maxPadding: 0.0,
+                minPadding: 0.0,
+
+
+                labels: {
+                    y:5,
+                    x:-5,
+                    align:'right',
+                    style: {
+                        fontSize: 12
+                    },
+                    format: '${value}'
+                },
+
+                title: {
+                    text: ''
+                },
+            },
+            xAxis: {
+                labels: {
+                    style: {
+                        fontSize: 12
+                    }
+                },
+                categories: ['Underdogs', 'Favorites']
+            },
+
+            loading: false
+        }
+
+});
+</script>
+
+{% endblock %}

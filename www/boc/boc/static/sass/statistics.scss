@@ -1,0 +1,50 @@
+#statistics{
+  .mdl-tabs__tab{
+    font-size:12px;
+    padding:10px 5px 0 5px;
+    width:25%;
+    line-height:1;
+    @media(min-width: $breakpoint-mobile-tablet){
+      font-size:14px;
+      padding:0 24px 0 24px;
+      width:auto;
+      line-height: 48px;
+    }
+  }
+  
+  .mdl-data-table{
+    tr{
+      height:20px;
+      @media(min-width: $breakpoint-mobile-tablet){
+        height:48px;
+      }
+      
+      td, th{
+       padding:5px 10px;
+       height:20px;
+       
+      @media(min-width: $breakpoint-mobile-tablet){
+        height:48px;
+        padding-left:18px;
+        padding-right:18px;
+      }
+       &:first-of-type{
+          padding-left:10px;
+          @media(min-width: $breakpoint-mobile-tablet){
+          padding-left:24px;
+          }
+       }
+     }
+      th{
+        @media(min-width: $breakpoint-mobile-tablet){
+          padding-bottom:8px;
+        }
+      }
+      td{
+        @media(min-width: $breakpoint-mobile-tablet){
+          padding-top:12px;
+        }
+      }
+    }
+  }
+}

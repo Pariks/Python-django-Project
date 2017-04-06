@@ -1,0 +1,22 @@
+ <div id="parlay-container" parlay data-ng-show="parlay">
+    <span data-ng-if="parlayBets.length == 0">Select Bets to Parlay:</span>
+    <table class="table table-condensed" data-ng-if="parlayBets.length > 0">
+        <thead>
+            <th>Bet</th>
+            <th>Sportsbook</th>
+            <th>Odds</th>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="bet in parlayBets">
+                <td>{{bet.bet}}</td>
+                <td>{{bet.sportsbook}}</td>
+                <td>{{bet.odds|formatOdds:oddsFormat:amount}}</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-right">
+                     <strong>Total: {{totalParlay()}}</strong>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

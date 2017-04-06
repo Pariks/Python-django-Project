@@ -1,0 +1,32 @@
+<div class="container">
+
+  <div class="tab-content">
+    {% for page in pages  %}
+     {% if forloop.counter0 < 1  %}
+       <div id="menu{{page.order}}" class="tab-pane fade in active">
+       	<h3>{{page.title|safe}}</h3>
+        {{page.content|safe}}
+        <div><img {%if page.image %}src="{{page.image.url}}" {% endif %} alt="{{page.title }}" width="900" height="400"> </div>
+        </div>
+     {% else %}
+    <div id="menu{{page.order}}" class="tab-pane fade">
+      	<h3>{{page.title|safe}}</h3>
+        {{page.content|safe}}
+        <div><img {%if page.image %}src="{{page.image.url}}" {% endif %} alt="{{page.title }}" width="900" height="400"> </div>
+    </div>
+     {% endif %}
+    {%endfor%}
+
+  </div>
+<br>
+   <ul class="nav nav-tabs">
+    {% for page in pages  %}
+     {% if forloop.counter0 < 1  %}
+        <li class="active"><a data-toggle="tab" href="#menu{{page.order}}">{{page.order}}</a></li>
+     {% else %}
+        <li><a data-toggle="tab" href="#menu{{page.order}}">{{page.order}}</a></li>
+     {% endif %}
+    {%endfor%}
+
+  </ul>
+</div>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load url from future %}
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link rel="shortcut icon" href="{% static "img/favicon.ico" %}"/>
+        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
+        <link rel="stylesheet" href="{% static "css/animate.css" %}"/>
+        <link rel="stylesheet" href="{% static "css/material.min.css" %}"/>
+        <link rel="stylesheet" href="{% static "css/base.css" %}"/>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/script.js/2.4.0/script.min.js"></script>
+        <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+        <script src="{% static "sass/src/selectfield/selectfield.js" %}"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script src="{% static "js/ngtimeago.js" %}"></script>
+        
+        
+        {% block head-scripts %}
+        {% endblock %}
+        
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        
+          ga('create', 'UA-58450659-1', 'auto');
+          ga('send', 'pageview');
+          
+        </script>
+        
+        <script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
+        
+        
+       
+        
+        <title>{% block title %}Bet on Combat | Make Money Betting on MMA, Boxing and Kickboxing{% endblock %}</title>
+        <meta name="description" content="{% block description %}Combat sports betting investment fund and advisory services{% endblock %}">
+        <meta name="keywords" content="{% block keywords %}sportsbetting, MMA, Boxing, Kickboxing, investment fund, advisory service, combat sports{% endblock %}">
+        
+        <meta property="fb:app_id" content="143589142456865">
+        <meta property="og:site_name" content="Bet on Combat">
+        <meta property="og:title" content="{% block fb_title %}Make Money Betting on MMA, Boxing and Kickboxing{% endblock %}">
+        <meta property="og:description" content="{% block fb_description %}Combat sports investment fund and advisory services{% endblock %}">
+        <meta property="og:image" content="http://betoncombat.com{% block fb_img %}/static/img/facebook-banner.png{% endblock %}">
+         <!-- <meta property="og:url" content="{% block fb_url %}{% endblock %}">
+        <meta property="og:type" content="{% block fb_type %}{% endblock %}">
+        -->
+
+        {% block css %}
+        {% endblock %}
+        
+    </head>
+    <body>
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+          <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+              <!-- Title -->
+              <a class="navbar-brand" href="/">
+                <img id="logo" src="{% static "img/logo.png" %}"/>
+              </a>
+              <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link {% block nav-news-class %}{% endblock %}" href="{% url 'news:index' %}">News</a>
+                <a class="mdl-navigation__link {% block nav-odds-class %}{% endblock %}" href="{% url 'odds:index' %}">Odds</a>
+                <a class="mdl-navigation__link {% block nav-events-class %}{% endblock %}" href="{% url 'mma:index' %}">Events</a>
+                <a class="mdl-navigation__link {% block nav-predictions-class %}{% endblock %}" href="{% url 'predictions:index' %}">Predictions</a>
+                <a class="mdl-navigation__link {% block nav-investing-class %}{% endblock %}" href="{% url 'investor:index' %}">Investing</a>
+                <a class="mdl-navigation__link {% block nav-statistics-class %}{% endblock %}" href="{% url 'statistics:index' %}">Statistics</a>
+                <a class="mdl-navigation__link {% block nav-fantasy-class %}{% endblock %}" href="{% url 'fantasy:index' %}">Fantasy</a>
+                <a class="mdl-navigation__link {% block nav-bookmakers-class %}{% endblock %}" href="{% url 'bookmakers:index' %}">Bookmakers</a>
+              </nav>
+              <!-- Add spacer, to align navigation to the right -->
+              <div class="mdl-layout-spacer"></div>
+              <!-- Navigation. We hide it in small screens. -->
+              <nav class="mdl-navigation">
+                {% if not user.is_authenticated %}
+                    <a class="mdl-navigation__link {% block nav-login-class %}{% endblock %}" href="{% url 'account_login' %}">Login</a>
+                    <a class="mdl-navigation__link {% block nav-join-class %}{% endblock %}" href="{% url 'account_signup'%}">Join</a>
+                {% else %}
+                    <a class="mdl-navigation__link {% block nav-settings-class %}{% endblock %}" href="{% url 'payments_change_card'  %}">Settings</a>
+                    <a class="mdl-navigation__link" href="{% url 'logout'%}">Logout</a>
+                {% endif %}
+              </nav>
+            </div>
+          </header>
+          <div class="mdl-layout__drawer mdl-layout--small-screen-only">
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link {% block nav-news-class-mobile %}{% endblock %}" href="{% url 'news:index' %}">News</a>
+                <a class="mdl-navigation__link {% block nav-odds-class-mobile %}{% endblock %}" href="{% url 'odds:index' %}">Odds</a>
+                <a class="mdl-navigation__link {% block nav-events-class-mobile %}{% endblock %}" href="{% url 'mma:index' %}">Events</a>
+                <a class="mdl-navigation__link {% block nav-predictions-class-mobile %}{% endblock %}" href="{% url 'predictions:index' %}">Predictions</a>
+                <a class="mdl-navigation__link {% block nav-investing-class-mobile %}{% endblock %}" href="{% url 'investor:index' %}">Investing</a>
+                <a class="mdl-navigation__link {% block nav-statistics-class-mobile %}{% endblock %}" href="{% url 'statistics:index' %}">Statistics</a>
+                <a class="mdl-navigation__link {% block nav-fantasy-class-mobile %}{% endblock %}" href="{% url 'fantasy:index' %}">Fantasy</a>
+                <a class="mdl-navigation__link {% block nav-bookmakers-class-mobile %}{% endblock %}" href="{% url 'bookmakers:index' %}">Bookmakers</a>
+            </nav>
+            <nav class="mdl-navigation">
+                {% if not user.is_authenticated %}
+                    <a class="mdl-navigation__link {% block nav-login-class-mobile %}{% endblock %}" href="{% url 'account_login' %}">Login</a>
+                    <a class="mdl-navigation__link {% block nav-join-class-mobile %}{% endblock %}" href="{% url 'account_signup'%}">Join</a>
+                {% else %}
+                    <a class="mdl-navigation__link {% block nav-settings-class-mobile %}{% endblock %}" href="{% url 'payments_change_card'  %}">Settings</a>
+                    <a class="mdl-navigation__link" href="{% url 'logout'%}">Logout</a>
+                {% endif %}
+              </nav>
+          </div>
+          <main class="mdl-layout__content ">
+            <div class="page-content">
+                {% block maincontent %}
+                {% endblock %}
+                
+                <footer>
+                    <div class="mdl-grid" id="contact-info">
+                        <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone text-center">
+                            <i class="fa fa-phone"></i>
+                            <div>
+                            514.705.3366 
+                            </div>
+                        </div>
+                        <div id="chat-footer" class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone text-center">
+                            <a href="{% url 'chat:index' %}">
+                            <i class="fa fa-comments-o"></i>
+                            <div>
+                            LIVE CHAT
+                            </div>
+                            </a>
+                        </div>
+                        
+                        <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone text-center">
+                            <a href="mailto:info@betoncombat.com">
+                            <i class="fa fa-envelope-o"></i>
+                            <div>
+                            EMAIL
+                            </div>
+                            </a>
+                        </div>
+                        
+                        <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone text-center">
+                            <i class="fa fa-users"></i>
+                            <div>
+                            CONSULTATION
+                            </div>
+                        </div>
+                        
+                        <!--
+                        <div class="col-xs-12 text-center">
+                        <span class="glyphicon glyphicon-earphone"></span> 514.705.3366 <span class="separator">|</span> 
+                       <div id="SkypeButton_Call_betoncombat_1" style="display:inline-block">
+                          <script type="text/javascript">
+                            Skype.ui({
+                              "name": "call",
+                              "element": "SkypeButton_Call_betoncombat_1",
+                              "participants": ["betoncombat"],
+                              "imageColor": "white"
+                            });
+                          </script>
+                        </div> 
+                        <span class="separator">|</span> <a href="mailto:info@betoncombat.com"><span class="glyphicon glyphicon-envelope"></span></a> <span class="separator">|</span> <span class="glyphicon glyphicon-comment"></span>
+                        </div>
+                        -->
+                    </div>
+                    
+                        <div class="text-center">
+                            <img src="{% static "img/as-seen-in.jpg" %}"/>
+                        </div>
+                        <div class="mdl-grid text-center" id="footer-links">
+                            
+                           
+                            <div class="mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone text-center social-icons" style="float:right">
+                                <a href="https://twitter.com/BetonCombat"><i class="fa fa-twitter social-icons"></i></a>
+                                <a href="https://www.facebook.com/BetOnCombat"><i class="fa fa-facebook social-icons"></i></a>
+                                <a href="#"><i class="fa fa-youtube"></i></a>
+                            </div>
+                            <div class="mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone" id="footer-link-container">
+                                <a href="{% url 'about' %}">ABOUT</a><span class="separator">|</span>
+                                <a href="{% url 'contact' %}">CONTACT</a><span class="separator">|</span>
+                                <a href="{% url 'faq' %}">FAQ</a><span class="separator">|</span>
+                                <a href="{% url 'betting_guide' %}">BETTING GUIDE</a><span class="separator">|</span>
+                                <a href="{% url 'refer' %}">REFER A FRIEND</a><span class="separator">|</span>
+                                <a href="{% url 'affiliates' %}">AFFILIATES</a><span class="separator">|</span>
+                                <a href="{% url 'legal' %}">LEGAL</a>
+                            </div>
+                             <div class="mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--4-col-phone" class="text-center">
+                                <img style="margin-right:5px; width:40px;" src="{% static "img/18-plus.png" %}">
+                                <a href="http://www.gamblersanonymous.org/ga/"><img style="margin-right:5px; width:40px;" src="{% static "img/gambling-anonymous.png" %}"></a>
+                                <a href="http://gamingassociates.com/Pages/Default.aspx"><img style="width:40px;" src="{% static "img/gaming-associates.png" %}"></a>
+                            </div>
+                            
+                        </div>
+                        <div class="text-center copyright">
+                            Copyright © 2015 Francombat Management, Inc. All right reserved.
+                        </div>
+                </footer>
+            </div>
+          </main>
+        </div>
+        
+        {% if request.path != '/chat/' %}
+            {% include "chat/chat_widget.html" %}
+        {% endif %}
+        <script src="//checkout.stripe.com/v2/checkout.js"></script>
+        <script src="{% static "js/eldarion-ajax.min.js" %}"></script>
+        <script>
+            {% if request.user.is_authenticated %}
+            var user = {username: "{{request.user.username}}", id: "{{request.user.id}}"};
+            
+            {% else %}
+            var user = null;
+            
+            {% endif %}
+        </script>
+        <script src="{% static "js/chat.controller.js" %}"></script>
+        <script>
+            $(function() {
+                $('body').on("click", '.change-card, .subscribe-form button[type=submit], .invest-form button[type=submit]', function(e) {
+                  e.preventDefault();
+                  var $form = $(this).closest("form"),
+                      token = function(res) {
+                        $form.find("input[name=stripe_token]").val(res.id);
+                        $form.trigger("submit");
+                      };
+        
+                  StripeCheckout.open({
+                    key:         $form.data("stripe-key"),
+                    name:        'Payment Method',
+                    panelLabel:  'Add Payment Method',
+                    token:       token
+                  });
+        
+                  return false;
+                });
+            });
+        </script>
+        
+        {% block scripts %}
+        {% endblock %}
+    </body>
+</html>

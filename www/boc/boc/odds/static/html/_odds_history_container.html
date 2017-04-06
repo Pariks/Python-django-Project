@@ -1,0 +1,20 @@
+<div id="line-history-container" data-ng-style="lineHistoryStyle">
+    <div class="loading-wheel-container" data-ng-if="isLoading">
+        <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+    </div>
+    <div data-ng-if="!isLoading">
+    <div class="open-odds pull-left">
+        Open Odds: <strong>{{openOdds|formatOdds:oddsFormat:amount}}</strong>
+    </div>
+    
+    <div class="close-button pull-right">
+        <a href data-ng-click="closeLineHistory()">
+        <i class="fa fa-times-circle"></i>
+        </a>
+    </div>
+    <div class="updated pull-right">
+        {{lineLastUpdated|timeago}}
+    </div>
+    <highchart id="chart1" config="chartConfig" style="width:100%;margin: 0 auto;"></highchart>
+    </div>
+</div>

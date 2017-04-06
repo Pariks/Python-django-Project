@@ -1,0 +1,12 @@
+<div class="message-container" id="{{ message["id"] }}">
+    <div class="message {{ message['username'] }}">
+        <div class="username">
+            {{ message['username'] }}
+            <span class="timestamp">
+                {{message['timestamp']}}
+            </span>
+        </div>
+        <div class="text"> {{ message["body"] }}
+        </div>
+    </div>
+</div>

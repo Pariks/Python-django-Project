@@ -1,0 +1,37 @@
+
+<div id="chat-button">
+    <span class="material-icons mdl-badge" data-badge="1">
+        <i class="fa fa-comments-o"></i>
+    </span>
+</div>
+
+<div id="chat-window" class="mdl-shadow--2dp">
+    <div id="chat-header" class="text-center">
+        <a class="mdl-button  mdl-js-button mdl-js-ripple-effect" href="{% url 'chat:index' %}">Enter Chat Room</a></h4>
+    </div>
+    {% if user.is_authenticated %}
+    <div id="messages-container"></div>
+    <div id="message-form-container">
+       <form id="message-form">
+           <div class="message-form-input-container">
+                <input name="body" id="message"/>
+           </div>
+            <input id="message-submit" type="submit" value="SEND"/>
+            {% csrf_token %}
+        </form>
+    </div>
+    {% else %}
+    <div id="signup-container" class="text-center">
+        Create a FREE account to use the Chat.<br/><br/>
+        <div class="text-center">
+        <a class="mdl-button mdl-button--accent mdl-button--raised mdl-js-button mdl-js-ripple-effect" href="{% url 'account_signup'%}" class="btn btn-gold-empty">Create Account</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<style>
+.{{user.username}}{
+    margin-left:10%;
+}
+</style>
+

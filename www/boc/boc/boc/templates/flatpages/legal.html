@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Legal | Bet on Combat{% endblock %}
+{% load url from future %}
+{% load i18n staticfiles %}
+{% block fb_title %}Legal | Bet on Combat{% endblock %}
+
+{% block maincontent %}
+<section>
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+        <h2>
+        Legal
+        </h2>
+      <div class="mdl-tabs__tab-bar">
+         <a class="mdl-tabs__tab is-active" href="#terms-panel">Terms & Conditions</a>
+         <a class="mdl-tabs__tab" href="#privacy-panel">Privacy Policy</a>
+         <a class="mdl-tabs__tab" href="#member_agreement-panel">Member Agreement</a>
+      </div>
+      <div class="mdl-tabs__panel is-active" id="terms-panel">
+            <h4>{{terms.title}}</h4>
+            {{terms.content|safe}}
+      </div>
+      <div class="mdl-tabs__panel is-active" id="privacy-panel">
+            <h4>{{privacy.title}}</h4>
+            {{privacy.content|safe}}
+      </div>
+      <div class="mdl-tabs__panel is-active" id="member_agreement-panel">
+            <h4>{{member_agreement.title}}</h4>
+            {{member_agreement.content|safe}}
+      </div>
+    </div>
+</section>
+{% endblock %}
+
+  

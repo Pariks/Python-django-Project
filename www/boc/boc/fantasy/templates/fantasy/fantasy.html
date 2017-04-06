@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load bootstrap_tags %}
+{% load humanize i18n %}
+{% load app_filters %}
+{% load clever_selects_extras %}
+{% load bootstrap %}
+{% load staticfiles %}
+{% block title %}Gaming | Bet on Combat{% endblock %}
+{% block fb_title %}Gaming | Bet on Combat{% endblock %}
+{% block fb_description %}Top sites for Gaming.{% endblock %}
+{% block nav-fantasy-class %}active{% endblock %}
+{% block nav-fantasy-class-mobile %}active{% endblock %}
+{% block maincontent %}
+<section>
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+    <div class="section-header">
+        <h2>Gaming</h2>
+    </div>
+          <div class="mdl-tabs__tab-bar">
+          <a href="#games" class="mdl-tabs__tab is-active">Games</a>
+          <a href="#how_to_play" class="mdl-tabs__tab">How to Play</a>
+          <a href="#faq-panel" class="mdl-tabs__tab">FAQ</a>
+          </div>
+         <div class="mdl-tabs__panel is-active" id="games">                                                                                                                                                    
+    <div class="section-body text-center center-content">
+        <a href="http://partners.draftkings.com/aff_c?offer_id=630&aff_id=343587&file_id=3492" target="_blank">
+            <img src="https://media.go2speed.org/brand/files/draftkings/630/620x300_MMAGuillotine_25K.png" width="620" height="300" border="0" />
+        </a>
+    </div>
+</div>
+      <div class="mdl-tabs__panel" id="how_to_play">     
+          {% load flatpages %}
+          {% get_flatpages as flatpages %}
+          {% for page in flatpages %}
+          {% if page.title == 'How To Play' %}                                                                                                                                                                 
+          {{page.content | safe}}
+          {% endif %}
+          {% endfor %}
+      </div>
+          <div class="mdl-tabs__panel" id="faq-panel">     
+          {% load flatpages %}
+          {% get_flatpages as flatpages %}
+          {% for page in flatpages %}
+          {% if page.title == 'Gaming FAQ' %}
+          {{page.content | safe}}
+          {% endif %}
+          {% endfor %}
+      </div>
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% load staticfiles %}
+{% if event.poster %}
+    <img src="/media/{{event.poster}}"/>
+{% else %}
+    <img class="default-poster" src="/static/img/promotion-logos/{{event.promotion.name|slugify}}.jpg">
+{% endif %}

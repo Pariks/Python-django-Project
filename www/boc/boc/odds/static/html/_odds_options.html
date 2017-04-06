@@ -1,0 +1,17 @@
+
+<div id="options">
+    <div class="odds-format-container">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" data-ng-show="oddsFormat.format === 'Return On'">
+             <input ng-model="amount.number" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" ></input>
+            <label class="mdl-textfield__label" for="sample4">Amount ($)</label>
+        </div>
+        <div class="form-group">
+            <select id="odds-format" data-ng-model="oddsFormat.format" class="form-control" ng-options="selectedOddsFormat for selectedOddsFormat in oddsFormats">
+            </select>
+        </div>
+    </div>
+    <label class="mdl-switch mdl-js-switch" for="parlay-switch">
+      <input type="checkbox" id="parlay-switch" class="mdl-switch__input" data-ng-click="updateParlay()" />
+      <span class="mdl-switch__label">Parlay</span>
+    </label>
+</div>

@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load i18n staticfiles %}
+{% load app_filters %}
+{% block css %}
+{% endblock %}
+
+{% block maincontent %}
+<style type="text/css">
+#carouselstyle {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+.carousel-caption{
+	position: absolute;
+	top:80px
+}
+.carousel-caption h1 {
+    font-size: 48px;
+}
+.carousel-caption h1 {
+    color: white;
+    line-height: 1.5;
+    margin: 0;
+    text-shadow: 0 2px 2px #000;
+}
+.carousel-caption h2 {
+    font-size: 30px;
+}
+.carousel-caption h2 {
+    color: white;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 2px #000;
+}
+
+@media only screen and (max-width: 768px) {
+	.carousel-caption{
+		position: absolute;
+		top:80px
+	}
+	.carousel-caption h1 {
+		font-size: 20px;
+	}
+	.carousel-caption h1 {
+		color: white;
+		line-height: 1.5;
+		margin: 0;
+		text-shadow: 0 2px 2px #000;
+	}
+	.carousel-caption h2 {
+		font-size: 15px;
+	}
+	.carousel-caption h2 {
+		color: white;
+		margin-bottom: 10px;
+		text-shadow: 0 2px 2px #000;
+	}
+
+}
+
+</style>
+<div id="home">
+  <!-- <div id="splash" class="parallax">
+        <div class="home-content">
+            <h1 class="animated fadeIn">Combat Sports Investment Fund <br/>& Advisory Services</h1>
+            <h2 class="animated fadeIn">Make money betting on MMA, Boxing and Kickboxing</h2>
+            <a href="{% url 'account_signup' %}"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Join Now</a>
+        </div>
+  </div> -->
+   <div id="carouselstyle" class="parallax">
+	{% include 'boc/_carousel.html' %}
+   </div>
+<div class="mdl-grid boc_fund">
+               <div class="mdl-cell mdl-cell--3-col right_v_line mdl-cell--hide-tablet mdl-cell--hide-phone">
+                   <h4 class="text-center boc_fund_text"><a href="{% url 'investor:index' %}"><strong>BOC FUND</strong></a><sup class="trade_sup">TM</sup></h4>                                                                                                                     
+               </div>
+               <div class="mdl-cell mdl-cell--3-col right_v_line mdl-cell--hide-tablet mdl-cell--hide-phone">
+                   <div class="text-center share_price_val boc_fund_text"><a href="{% url 'investor:index' %}"><strong>$1000.00</strong></a></div>
+                  <div class="text-center boc_fund_text">Share price</div>
+               </div>
+               <div class="mdl-cell mdl-cell--3-col right_v_line mdl-cell--hide-tablet mdl-cell--hide-phone">
+                   <div class="text-center share_price_val boc_fund_text"><a href="{% url 'statistics:index' %}"><strong><div id="odometer1" class="odometer1">1,257,134.07</div></strong></a>
+                  </div>
+                  <div class="text-center boc_fund_text">Funds Under Management</div>
+               </div>
+               <div class="mdl-cell mdl-cell--3-col mdl-cell--hide-tablet mdl-cell--hide-phone">
+                   <div class="text-center boc_fund_date boc_fund_text">As of {% now "F jS, Y" %}</div>
+                   <div class="text-center boc_fund_text"><span class="blink">Open</span></div>
+               </div>
+               <div class="mdl-cell mdl-cell--3-desktop right_v_line mdl-cell--hide-desktop mdl-cell--hide-phone">
+                   <h4 class="text-center boc_fund_text"><a href="{% url 'investor:index' %}"><strong>BOC FUND</strong></a><sup class="trade_sup">TM</sup></h4>
+               </div>
+               <div class="mdl-cell mdl-cell--3-desktop mdl-cell--hide-desktop mdl-cell--hide-phone">
+                   <div class="text-center share_price_val boc_fund_text"><a href="{% url 'investor:index' %}"><strong>$1000.00</strong></a></div>
+                  <div class="text-center boc_fund_text">Share price</div>
+               </div>
+               <div class="mdl-cell mdl-cell--3-desktop right_v_line mdl-cell--hide-desktop mdl-cell--hide-phone">
+                   <div class="text-center share_price_val boc_fund_text"><a href="{% url 'statistics:index' %}"><strong><div id="odometer2" class="odometer2">1,257,134.07</div></strong></a>
+                  </div>
+                  <div class="text-center boc_fund_text">Funds Under Management</div>
+               </div>
+               <div class="mdl-cell mdl-cell--3-desktop mdl-cell--hide-desktop mdl-cell--hide-phone">
+                   <div class="text-center boc_fund_date boc_fund_text">As of {% now "F jS, Y" %}</div>
+                   <div class="text-center boc_fund_text"><span class="blink">Open</span></div>
+               </div>
+               <div class="mdl-cell mdl-cell--3-desktop mdl-cell--hide-desktop mdl-cell--hide-tablet">
+                   <h4 class="text-center boc_fund_text"><a href="{% url 'investor:index' %}"><strong>BOC FUND</strong></a><sup class="trade_sup">TM</sup></h4>
+               </div>
+               <div class="mdl-cell mdl-cell--3-desktop mdl-cell--hide-desktop mdl-cell--hide-tablet">
+                   <div class="text-center share_price_val boc_fund_text"><a href="{% url 'investor:index' %}"><strong>$1000.00</strong></a></div>
+                  <div class="text-center boc_fund_text">Share price</div>
+               </div>
+               <div class="mdl-cell mdl-cell--3-desktop mdl-cell--hide-desktop mdl-cell--hide-tablet">
+                   <div class="text-center share_price_val boc_fund_text"><a href="{% url 'statistics:index' %}"><strong><div id="odometer3" class="odometer3">1,257,134.07</div></strong></a>
+                  </div>
+                  <div class="text-center boc_fund_text">Funds Under Management</div>
+               </div>
+               <div class="mdl-cell mdl-cell--3-desktop mdl-cell--hide-desktop mdl-cell--hide-tablet">
+                   <div class="text-center boc_fund_date boc_fund_text">As of {% now "F jS, Y" %}</div>
+                   <div class="text-center boc_fund_text"><span class="blink">Open</span></div>
+               </div>
+           </div>
+   <div id="news-section">
+       <div class="home-content">
+
+           <h2>News</h2>
+           <div class="mdl-grid">
+           {% for article in articles %}
+                {% include 'boc/_article.html' %}
+            {% endfor %}
+            </div>
+
+            <div class="text-right">
+            <a href="{% url 'news:index' %}" class="mdl-button">More News</a>
+            </div>
+            <hr>
+
+            <h2>Predictions</h2>
+           <div class="mdl-grid">
+           {% for prediction in predictions  %}
+                {% include 'boc/_prediction.html' %}
+            {% endfor %}
+            </div>
+            <div class="text-right">
+            <a href="{% url 'predictions:index' %}" class="mdl-button">More Predictions</a>
+            </div>
+       </div>
+   </div>
+
+   <div id="free-pick">
+       <div class="home-content text-center">
+           <h3>
+               Enter your Phone Number for a <span style="Border-bottom:2px solid rgb(167, 122, 63)">FREE PICK</span>
+           </h3>
+           <form action="{% url 'userprofile:phone_number' %}" id="free-pick-form" class="form" method="POST">
+
+            {{phone_form.phone_number|material}}
+            {% csrf_token %}
+            <button type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect">Submit</button>
+            <p id="response-message" class="color-gold"></p>
+           </form>
+
+
+       </div>
+   </div>
+
+    <div class="home-content">
+        {% include 'boc/testimonial.html' %}
+    </div>
+
+   <div id="free-betting-guide" style="background: white">
+       <div class="home-content text-center">
+           <h3>
+           Learn How to Bet on Fights with our Free Betting Guide
+           </h3>
+           <a href="{% url 'betting_guide' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Learn More</a>
+       </div>
+   </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+(function(){
+
+  var parallax = document.querySelectorAll(".parallax"),
+      speed = 0.3;
+
+  $('.mdl-layout__content').scroll(function(){
+    [].slice.call(parallax).forEach(function(el,i){
+
+      var windowYOffset = $('.home-content').offset(),
+          elBackgrounPos = "0 " + ((windowYOffset.top - 164) * speed) + "px";
+
+      el.style.backgroundPosition = elBackgrounPos;
+
+    });
+  });
+
+})();
+
+ $('#free-pick-form').on('submit', function(event) {
+      event.preventDefault();
+
+      $.ajax({ // create an AJAX call...
+          data: $(this).serialize(), // get the form data
+          type: $(this).attr('method'), // GET or POST
+          url: $(this).attr('action'), // the file to call
+          success: function(response) { // on success..
+              $('#id_phone_number').val(""); // update the DIV
+              $('#response-message').html('Submitted');
+          },
+          error: function(response){
+              $('#response-message').html(JSON.parse(response.responseText).phone_number)
+          }
+      });
+      return false;
+    });
+</script>
+<script src="{% static "js/CountUp.js" %}"></script>
+<script>
+var options = {
+      useEasing : true, 
+      useGrouping : true, 
+      separator : ',', 
+      decimal : '.', 
+      prefix : '$', 
+      suffix : '&nbsp;<i class="fa fa-caret-up boc_fund_arrow_up" aria-hidden="true"></i>' 
+};
+var demo1 = new CountUp("odometer1", 100, {{funds.amount}}, 2, 3, options);
+demo1.start();
+var demo2 = new CountUp("odometer2", 100, {{funds.amount}}, 2, 3, options);                                                                                                                                          
+demo2.start();
+var demo3 = new CountUp("odometer3", 100, {{funds.amount}}, 2, 3, options);                                                                                                                                          
+demo3.start();
+</script>
+<script>
+(function blink() { 
+  $('.blink').fadeOut(1000).fadeIn(1000, blink); 
+})();
+</script>
+{% endblock %}
+

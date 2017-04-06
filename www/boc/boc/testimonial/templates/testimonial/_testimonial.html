@@ -1,0 +1,16 @@
+<div class="list-testimonial">
+    <div class="video-testimonial">
+        {% if testimonial.video %}
+        <div align="center" class="embed-responsive embed-responsive-16by9">
+            <video width="320" height="240" controls>
+                <source src="{{testimonial.video.url}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+        </div>
+        {% endif %}
+    </div>                                                                                                                                                                                                     
+    <div class="testimonial-content">
+        <h3><span id="testimonial-text">{{testimonial.content | safe}}</span></h3>
+        <h5><I><span id="testimonial-author">{{testimonial.name}}</span></I></h5>
+    </div>
+</div>

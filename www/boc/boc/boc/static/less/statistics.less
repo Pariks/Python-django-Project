@@ -1,0 +1,44 @@
+#life-to-date{
+  .table{
+    td{
+      font-weight:bold;
+      font-size:15px;
+    }
+  }
+}
+
+.statistics-table{
+  text-align:center;
+  border-color:gray;
+  border-radius:3px 3px 0 0;
+  thead{
+    th{
+      text-align:center;
+      background-color:black;
+      color:white;
+      font-weight:normal;
+      padding:0;
+      &:first-of-type{
+        border-radius:3px 0 0 0;
+        text-align:left;
+      }
+      &:last-of-type{
+        border-radius:0 3px 0 0;
+      }
+      
+    }
+  }
+  tbody{
+    tr{ 
+      td{
+        padding-top:10px;
+        padding-bottom:10px;
+        border-color:@border-color;
+        &.text-right{
+          padding-left:5px;
+          padding-right:35px;
+        }
+      }
+    }
+  }
+}

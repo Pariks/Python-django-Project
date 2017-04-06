@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load bookmaker_filters %}
+{% block title %}{{prediction_article.title}} | Bet on Combat{% endblock %}
+{% block fb_title %}{{prediction_article.title}} | Bet on Combat{% endblock %}
+{% block fb_description %}{{prediction_article.title}} Predictions.{% endblock %}
+{% block fb_img %}/media/{{prediction_article.image}}{% endblock %}
+{% block nav-predictions-class %}active{% endblock %}
+{% block nav-predictions-class-mobile %}active{% endblock %}
+
+
+{% block maincontent %}
+<section id="predictions">
+    <div class="section-header">
+        <h2>{{prediction_article.title}}</h2>
+    </div>
+    <div class="section-body">
+         {% if prediction_article.prediction_set.all.count == 0 %}
+        <div class="text-center" style="min-height:500px;">
+            Predictions, if there is any, would be posted right here between Wednesday Noon up to an 1 hours after the weigh-in.
+         </div>
+        {% endif %}
+        
+        {% for event in events %}
+        {% include 'mma/_event_info.html' %}
+        
+        {% endfor %}
+        
+        {% if prediction_article.content %}
+            {{prediction_article.content}}
+        {% endif %}
+        
+    </div>
+</section>
+
+{% if not prediction_article.open %}
+    {% if not user.is_authenticated %}
+        {% include 'boc/_members_only.html' %}
+    {% else %}
+        {% if not user.investor and not user.customer.has_active_subscription and  user.username != 'Ryan' and user.username != 'Francombat' %}
+           {% include 'boc/_payment_form.html' %}
+        {% else %}
+            {% for prediction in prediction_article.prediction_set.all %}
+                {% include 'predictions/_prediction.html' %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% else %}
+    {% for prediction in prediction_article.prediction_set.all %}
+        {% include 'predictions/_prediction.html' %}
+    {% endfor %}
+{% endif %}
+{% endblock %}
+  

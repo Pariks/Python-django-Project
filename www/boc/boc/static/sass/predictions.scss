@@ -1,0 +1,83 @@
+#predictions{
+  .event-poster{
+    float:left;
+    width:240px;
+    height:290px;
+    overflow:hidden;
+    img{
+      width:100%;
+    }
+    
+  }
+  .event-info{
+    overflow:hidden;
+   .mdl-data-table{
+     margin-bottom:0;
+   }
+  }
+}
+
+.prediction{
+    .bet-type{
+      color:white;
+      background-color:unquote("rgb(#{$color-accent})");
+      padding:6px;
+      float:left;
+      text-transform:uppercase;
+      margin-right:10px;
+    }
+    .risk{
+      float:right;
+    }
+  .bet-name{
+    overflow:hidden;
+  }
+  .fight-name{
+    margin-top:5px;
+    color:$text-color-sub;
+  }
+  
+  .matchup-table{
+    max-width:500px;
+    margin:0 auto 20px auto;
+    td{
+      text-align:center;
+    }
+     tr:first-of-type{
+      font-size:14px;
+    }
+  }
+  .prediction-table{
+    
+    max-width:500px;
+    margin:0 auto 20px auto;
+    tr:first-of-type{
+      font-size:14px;
+    }
+    td{
+      text-align:center;
+    }
+  }
+  .mdl-grid{
+    margin:-8px;
+    padding:0;
+  }
+  .outcome{
+    span{
+      background-color:white !important;
+    }
+  }
+  .result{
+    color:white;
+    padding:3px 6px;
+    &.pending, &.push, &.void{
+      background-color:gray;
+    }
+    &.win{
+      background-color:$color-win;
+    }
+    &.loss{
+      background-color:$color-loss;
+    }
+  }
+}

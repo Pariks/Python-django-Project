@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block title %}{{title}} Events | Bet on Combat{% endblock %}
+{% block fb_title %}{{title}} Past | Bet on Combat{% endblock %}
+{% block fb_description %}{{title}} MMA and Boxing Events.{% endblock %}
+{% block nav-events-class %}active{% endblock %}
+{% block nav-events-class-mobile %}active{% endblock %}
+
+{% block maincontent %}
+<section>
+    <div class="section-header">
+         <h2>{{title}} Events</h2>
+    </div>
+    <div class="section-body">
+        {% for event in events %}
+            {% include 'mma/_event_list.html' %}
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+  

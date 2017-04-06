@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% block title %}UserProfile | Bet on Combat{% endblock %}
+{% block fb_title %}UserProfile | Bet on Combat{% endblock %}
+{% block fb_description %}User profile betting on combat sports.{% endblock %}
+{% block maincontent %}
+<section class="mdl-shadow--2dp bookmakers">
+    <div class="section-header">
+        <h2>Profile</h2>
+    </div>
+    <div class="section-body">
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--3-col">
+                {% if user_info.userprofile.avatar %}
+                <img class="text-center" src="{{MEDIA_URL}}{{user_info.userprofile.avatar}}"/>
+                {% else %}
+                <img  class="text-center" src="{{MEDIA_URL}}avatar/default-male-avatar.jpg"/>
+                {% endif %}
+            </div>
+            <div class="mdl-cell mdl-cell--9-col profile_info">
+                <div class="profile_info_child">
+                <p><strong>{{user_info.first_name}}{{user_info.last_name}}<br>@{{user_info.username}}</strong></p>
+                <p><strong> Email:</strong> {{user_info.email}} <br><strong>Joined:</strong> {{user_info.date_joined|date}}<br>
+                <strong>Last Login:</strong> {{user_info.last_login}}<br>
+                <strong>Link:</strong> <a href="{% url 'userprofile:profile_display' user_info.username %}">http://betoncombat.com{% url 'userprofile:profile_display' user_info.username %}</a>
+                </p>
+                </div>
+            </div>
+        </div>
+        <div class="mdl-grid profile_info">
+            <div class="mdl-cell mdl-cell--4-col text-center">
+                <strong>{{following_count}}<br>FOLLOWING</strong>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col text-center">     
+                <strong>{{followed_by_count}}<br>FOLLOWERS</strong>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col text-center">     
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{% url 'userprofile:follow_user' user_info.username %}"><i class="fa fa-user-plus"></i>&nbsp;Follow</a>                                     
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

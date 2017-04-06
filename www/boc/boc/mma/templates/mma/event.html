@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load staticfiles %}
+{% load bookmaker_filters %}
+{% block head-scripts %}
+{% if page == 'Odds' %}
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="{% static "js/ngtimeago.js" %}"></script>
+    <script src="{% static "js/ui-bootstrap-tpls-0.13.0.min.js" %}"></script>
+    <script src="http://code.highcharts.com/highcharts.src.js"></script>
+    <script src="{% static "js/highcharts-ng-master/dist/highcharts-ng.min.js" %}"></script>
+{% endif %}
+{% endblock %}
+
+{% block title %}{{event.name}} {{page}} | Bet on Combat{% endblock %}
+{% block fb_title %}{{event.name}} {{page}} | Bet on Combat{% endblock %}
+{% block fb_description %}Upcoming and past Bet on Combat predicitons.{% endblock %}
+{% block nav-events-class %}active{% endblock %}
+{% block nav-events-class-mobile %}active{% endblock %}
+
+{% block maincontent %}
+<section>
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect is-upgraded">
+      <h2>
+          {{event.name}}
+      </h2>
+      {% include 'mma/_event_info.html' %}
+    
+  </div>
+</section>
+{% wide_banner %}
+<section>
+    <div class="mdl-tabs mdl-js-ripple-effect is-upgraded">
+        <div class="mdl-tabs__tab-bar">
+              <a href="{{event.get_fights_url}}" class="mdl-tabs__tab {% if page == 'Fights' %}is-active{% endif %}">Fights</a>
+              <a href="{{event.get_odds_url}}" class="mdl-tabs__tab {% if page == 'Odds' %}is-active{% endif %}">Odds</a>
+          </div>
+    
+      <div class="mdl-tabs__panel {% if page == 'Fights' %}is-active{% endif %}" id="fights">
+          {% if fights|length == 0 %}
+            No Fights
+          {% endif %}
+          
+          {% if page == 'Fights' %}
+                <div  class="mdl-grid">
+                {% regroup fights by get_fight_type_display as fight_type_list %}
+                {% for fight_type in fight_type_list %}
+                   <div class="mdl-cell mdl-cell--12-col">
+                        <h4>{{fight_type.grouper}}</h4>
+                   </div> 
+                    {% for fight in fight_type.list %}
+                         
+                         {% if fight.fighter_winner %}
+                             <div class="mdl-cell mdl-cell--6-col">
+                                 <span class="weightclass">{{fight.weight_class.weight_class}}</span> {{fight.fighter_winner}} <em style="font-size:11px;">def.</em> {{fight.fighter_loser}}
+                             </div>
+                             <div class="mdl-cell mdl-cell--6-col text-center">
+                                 <em>
+                                {{fight.get_result}}
+                                </em>
+                             </div>
+                        {% else %}
+                        
+                            <div class="mdl-cell mdl-cell--6-col">
+                                <span class="weightclass">{{fight.weight_class.weight_class}}</span> {{fight.fighter1}} <em style="font-size:11px;">vs.</em> {{fight.fighter2}}
+                            </div> 
+                            <div class="mdl-cell mdl-cell--6-col">
+                                
+                            </div>
+                        {% endif %}
+                     {% endfor %}
+                         
+                {% endfor %}
+                </div>    
+          {% endif %}
+          
+      </div>
+      <div class="mdl-tabs__panel {% if page == 'Odds' %}is-active{% endif %}" id="event-odds">
+          {% if page == 'Odds' %}
+              {% if event_odds == '[]' %}
+               No Odds
+              {% else %}
+                {% verbatim %}
+                  <div ng-app="odds"  class="container" id="odds" data-ng-cloak>
+                    <div data-ng-view data-ng-controller="OddsController">
+                        <ng-include src="'/static/html/_parlay_container.html'"></ng-include>
+                        <ng-include src="'/static/html/_odds_history_container.html'"></ng-include>
+                        <ng-include src="'/static/html/_odds_options.html'"></ng-include>
+                        <em class="last-updated">Last Updated: {{lastUpdated(event.last_updated)}}</em>
+                        <ng-include src="'/static/html/_odds_table.html'"></ng-include>
+                    </div> 
+                  </div>
+                {% endverbatim %}
+          
+            {% endif %}
+          {% endif %}
+      </div>
+  </div>
+</section>
+  
+{% endblock %}
+
+
+{% block scripts %}
+{% if page == 'Odds' %}
+<script>
+var event_odds = JSON.parse('{{event_odds|escapejs}}');
+var months = null;
+</script>
+<script src="/static/js/odds.filters.js"></script>
+<script src="/static/js/odds.directives.js"></script>
+<script src="/static/js/odds.controllers.js"></script>
+{% endif %}
+{% endblock %}
+  

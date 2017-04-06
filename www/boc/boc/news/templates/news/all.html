@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block title %}News | Bet on Combat{% endblock %}
+{% block fb_title %}News | Bet on Combat{% endblock %}
+{% block fb_description %}Bet on Combat News.{% endblock %}
+{% block nav-news-class %}active{% endblock %}
+{% block nav-news-class-mobile %}active{% endblock %}
+
+{% block maincontent %}
+
+<section id="news">
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+        <h2>
+          News
+        </h2>
+
+
+        <div class="mdl-tabs__tab-bar">
+                  <a href="#recent-panel" class="mdl-tabs__tab is-active">Recent</a>
+                  <a href="#past-panel" class="mdl-tabs__tab">Past</a>
+        </div>
+        <div class="mdl-tabs__panel is-active" id="recent-panel">
+                 {% for article in articles_recent %}
+                    {% include 'news/_article_list.html'%}
+                 {% endfor %}
+        </div>
+
+        <div class="mdl-tabs__panel" id="past-panel">
+            {% for article in articles_past %}
+                    {% include 'news/_article_list.html'%}
+            {% endfor %}
+        </div>
+
+    <!--
+    <div class="section-body">
+        {% for article in articles %}
+            {% include 'news/_article_list.html'%}
+        {% endfor %}
+    </div>
+    -->
+     </div>
+</section>
+{% endblock %}

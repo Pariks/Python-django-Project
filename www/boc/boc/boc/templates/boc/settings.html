@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load bootstrap %}
+{% block title %}Settings | Bet on Combat{% endblock %}
+{% block fb_title %}Setting | Bet on Combat{% endblock %}
+{% block fb_description %}{% endblock %}
+{% block fb_img %}{% endblock %}
+{% block nav-settings-class %}active{% endblock %}
+{% block nav-settings-class-mobile %}active{% endblock %}
+{% block maincontent %}
+
+<section>
+    {% if user.customer.has_active_subscription %}
+    <div class="mdl-tabs mdl-js-ripple-effect is-upgraded">
+        <h2>
+              Payment Settings
+        </h2>
+        <div class="mdl-tabs__tab-bar">
+            <a href="{% url 'payments_change_card'  %}" class="mdl-tabs__tab {% if request.path == '/payments/change/card/' %}is-active{% endif %}">Change Card</a>
+            <a href="{% url 'payments_change_plan' %}" class="mdl-tabs__tab {% if request.path == '/payments/change/plan/' %}is-active{% endif %}">Change Plan</a>
+            <a href="{% url 'payments_history' %}" class="mdl-tabs__tab {% if request.path == '/payments/history/' %}is-active{% endif %}">Payment History</a>
+            <a href="{% url 'payments_cancel' %}" class="mdl-tabs__tab {% if request.path == '/payments/cancel/' %}is-active{% endif %}">Cancel</a>
+        </div>
+        <div class="section-body center-content">
+        {% block settingscontent %}
+        
+        {% endblock %}
+        </div>
+    </div>
+    {% else %}
+        <div class="section-header">
+            <h2>Payment Settings</h2>
+        </div>
+        {% load payments_tags %}
+        {% if user.investor or user.is_staff %}
+            <div class="section-body text-center center-content" style="min-height:500px;">
+                No Payment Settings
+            </div/>
+        {% elif not user.customer.has_active_subscription %}
+            <div class="section-body center-content">
+            {% subscribe_form %}
+            </div>
+        {% endif %}
+    {% endif %}
+</section>
+{% endblock %}

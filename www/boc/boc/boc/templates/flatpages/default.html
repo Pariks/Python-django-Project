@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{flatpage.title}} | Bet on Combat{% endblock %}
+{% load url from future %}
+{% load i18n staticfiles %}
+{% block fb_title %}{{flatpage.title}} | Bet on Combat{% endblock %}
+{% block fb_description %}{% endblock %}
+
+{% block maincontent %}
+    <div class="container main-container">
+        <section class="section">
+            <div class="section-header">
+                <h2>
+                {{flatpage.title}}
+                </h2>
+            </div>
+            <div class="section-body">
+                {{flatpage.content}}
+            </div>
+            
+        </section>
+    </div>
+{% endblock %}
+
+  

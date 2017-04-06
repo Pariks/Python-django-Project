@@ -1,0 +1,16 @@
+<div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--6-col-phone">
+    <a href="{{ article.get_absolute_url }}" title="{{ article.title }}" rel="bookmark">
+    <div class="grid-list">
+        <div class="header">
+            {{article.title}}
+        </div>
+        {% if article.image %}
+        <img src="{{ article.image.url }}" alt="{{ article.title }}"/>   
+        {% endif %}
+            <div class="footer">
+                <span class="color-gold">{{article.author.first_name}} {{article.author.last_name}}</span>
+                <div>{{article.date_published}}</div>
+            </div>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,25 @@
+{% load app_filters %}
+{% load mma_filters %}
+{% load humanize %}
+<div class="list-container event-list">
+    <div class="image-container">
+        <a href="{{event.get_fights_url}}">
+            {% poster event %}
+        </a>
+    </div>
+    <div class="content-container">
+        <h4>
+            <a href="{{event.get_fights_url}}">{{event.name}}</a>
+        </h4>
+        <div class="content-info">
+            {{event.date}}
+        </div>
+        <div class="content-preview">
+              <ul>
+                  <li><strong>Venue:</strong> {% if event.venue %}{{event.venue}}{% else %}TBA{% endif %}</li>
+                  <li><strong>City:</strong> {% if event.city %}{{event.city}}{% else %}TBA{% endif %}</li>
+                  <li><strong>Broadcast:</strong> {% if event.broadcast %}{{event.broadcast}}{% else %}TBA{% endif %}</li>
+              </ul>
+          </div>
+    </div>
+</div>

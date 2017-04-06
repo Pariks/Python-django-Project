@@ -1,0 +1,8 @@
+{% load app_filters %}
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{field.name}}">
+  <input name="{{ field.name }}" type="checkbox" class="mdl-checkbox__input"  id="{{field.name}}" value="{{ field.value }}">
+  <span class="mdl-checkbox__label">{{field.label}}</a></span>
+</label>
+ {{ field.errors }}
+            
+            

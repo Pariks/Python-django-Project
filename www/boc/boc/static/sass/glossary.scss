@@ -1,0 +1,19 @@
+#glossary{
+  .glossary-letters{
+    font-size:24px;
+    width:100%;
+    text-align:left;
+  }
+  .glossary-heading{
+    font-weight:bold;
+    font-size:18px;
+    padding:10px 0;
+  }
+  ul{
+    padding:0;
+    li{
+      list-style-type:none;
+      padding-bottom:10px;
+    }
+  }
+}

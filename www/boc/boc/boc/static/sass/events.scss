@@ -1,0 +1,90 @@
+.event-info-container{
+  .event-poster{
+    display:none;
+    float:left;
+    width:240px;
+    height:290px;
+    overflow:hidden;
+    
+    @media (min-width: $breakpoint-mobile) {
+      display:block;
+    }
+    img{
+      width:100%;
+    }
+    
+  }
+  .event-info{
+    overflow:hidden;
+   .mdl-data-table{
+     margin-bottom:0;
+     td{
+       padding-left:12px;
+       @media (min-width: $breakpoint-tablet) {
+        padding-left:24px;
+      }
+     }
+   }
+  }
+}
+#fights{
+  .weightclass{
+    background-color:lightgray;
+    font-size:12px;
+    padding:3px 5px;
+    width:110px;
+    margin-right:10px;
+    display:block;
+    float:left;
+    text-align:center;
+  }
+  h4{
+    margin-top:0;
+    margin-bottom:0;
+  }
+}
+
+.event-list{
+  .default-poster{
+    margin-top:-40px;
+  }
+}
+
+
+#predictions{
+  .event-info-container{
+    .event-info{
+      overflow:hidden;
+     .mdl-data-table{
+       margin-bottom:20px;
+     }
+    }
+  }
+}
+#event-odds{
+  #options{
+    float:right;
+    padding-right:20px;
+    width:100%;
+    .mdl-switch{
+      float:right;
+      width:120px;
+      clear:both;
+    }
+    .mdl-textfield{
+      width:150px;
+      float:right;
+    }
+    .odds-format-container{
+      clear:both;
+      margin-bottom:10px;
+    }
+    .form-group{
+      float:right;
+      clear:both;
+    }
+    #odds-format{
+      width:150px;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load staticfiles %}
+{% block title %}Testimonials | Bet on Combat{% endblock %}
+{% block fb_title %}Testimonials | Bet on Combat{% endblock %}
+{% block fb_description %}Bet on Combat News.{% endblock %}
+{% block maincontent %}
+<section>
+    <h1 class="text-center">Testimonial</h1>
+{%for testimonial in testimonials%}
+{% if testimonial.video %}
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col text-center">
+            <video width="540" height="440" controls>
+                <source src="http://betoncombat.pythonanywhere.com{{testimonial.video.url}}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+</div>
+</div>
+{% endif %}
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+        {{testimonial.content|safe}}
+    </div>
+</div>
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col text-center"><strong>{{testimonial.name}}</strong></div>
+</div>
+<hr>
+{% endfor %}
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+        <p><strong>These are just a few of the many satisfied bettors who have followed our winning advice over the years, as well as investors who have put their hard earned money into our growing investment fund.
+            You can join the club by signing up for a <a href="{% url 'consulting:index' %}">Premium membership</a> today. Of course, you can always tail our <a href="{% url 'news:index' %}">free predictions every week in the news section</a> or check out our documented
+            betting <a href="{% url 'statistics:index' %}">performance</a> to get a taste of the type of the results you will get by following the plays of true professional Combat Sports Investors.</strong></p>                                                                                                                         
+    <p><strong><sup>*</sup>Results may not be typical or may vary from person to person. See disclaimer here</strong></p>
+    </div>
+</div>
+</section>
+{% endblock %}

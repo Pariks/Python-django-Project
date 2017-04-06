@@ -1,0 +1,93 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:100,400,700,900);
+
+body{
+  background-color:@bg-color;
+  font-family: Lato, serif;
+  color:@text-color;
+  //background-image: url('/static/img/background-1.jpg');
+  //background-size:cover;
+  //background-attachment: fixed;
+  //background-repeat: no-repeat;
+  font-family:@font-family-sans-serif;
+  
+}
+
+a{
+  color:@color-gold;
+  &:hover, &:active, &:focus{
+    color:lighten(@color-gold,10%);
+    text-decoration:none;
+  }
+}
+
+#main{
+  margin-top:80px;
+  min-height:600px;
+}
+
+.main-container{
+  padding-top:30px;
+  padding-bottom:30px;
+  max-width:1100px;
+}
+
+.section{
+  background-color:@section-bg-color;
+  .section-header{
+    padding:10px 15px;
+    color:#E4E4E4;
+    background-color:@section-header-bg-color;
+    h1, h2, h3{
+      margin:0;
+    }
+  }
+  .section-body{
+    padding:20px;
+    
+  }
+  margin-bottom:20px;
+}
+
+.container{
+  @media (min-width: @screen-sm-min) {
+   width:95%;
+  }
+  @media (min-width: @screen-md-min) {
+   width:970px;
+  }
+  @media (min-width: @screen-mdlg-min) {
+   width:1100px;
+  }
+  @media (min-width: @screen-lg-min) {
+   width:1300px;
+  }
+}
+
+h1{
+  font-size: 20px;
+  @media (min-width: @screen-sm-min) {
+   font-size:36px;
+  }
+}
+
+h2{
+  font-size: 18px;
+  @media (min-width: @screen-sm-min) {
+   font-size:26px;
+  }
+}
+
+h3{
+  font-size: 14px;
+  @media (min-width: @screen-sm-min) {
+   font-size:24px;
+  }
+}
+
+img{
+  max-width:100%;
+}
+
+.min-height{
+  min-height:500px;
+}

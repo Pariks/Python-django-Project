@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% block title %}UserProfile | Bet on Combat{% endblock %}
+{% block fb_title %}UserProfile | Bet on Combat{% endblock %}
+{% block fb_description %}User profile betting on combat sports.{% endblock %}
+{% block maincontent %}
+<section class="mdl-shadow--2dp bookmakers">
+    <div class="section-header">
+        <h2 class="text-center">Avatar</h2>                                                                                                                                                                                                  
+    </div>
+    <div class="section-body text-center">
+        <div class="mdl-grid text-center">
+            <div class="mdl-cell mdl-cell--4-col"></div>
+            <div class="mdl-cell mdl-cell--4-col">
+                {% if user.userprofile.avatar %}
+                <img src="{{MEDIA_URL}}{{user.userprofile.avatar}}"/>
+                {% else %}
+                <img src="{{MEDIA_URL}}/avatar/default-male-avatar.jpg"/>     
+               {% endif %}
+            </div>
+            <div class="mdl-cell mdl-cell--4-col"></div>
+        </div>
+        <form action="{% url 'userprofile:avatar_update' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.avatar.errors}}
+            {{ form.avatar }}
+            <p><button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="POST" />Upload</button></p>
+        </form>
+    </div>
+</section>
+{% endblock %}

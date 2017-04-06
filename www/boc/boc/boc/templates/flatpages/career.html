@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Career | Bet on Combat{% endblock %}
+{% load url from future %}
+{% load i18n staticfiles %}
+{% block fb_title %}Career | Bet on Combat{% endblock %}
+{% block maincontent %}
+<section>
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+        <h2>
+        Career
+        </h2>
+      <div class="mdl-tabs__tab-bar">
+         <a class="mdl-tabs__tab is-active" href="#occassion-panel">THE OPPORTUNITY</a>
+         <a class="mdl-tabs__tab" href="#job-panel">JOB OFFER</a>
+      </div>
+      <div class="mdl-tabs__panel is-active" id="occassion-panel">
+           {% include 'flatpages/opportunity.html' %}
+      </div>
+      <div class="mdl-tabs__panel" id="job-panel">
+           <h4>{{job_offer.title}}</h4>
+            {{job_offer.content|safe}}
+
+      </div>
+    </div>
+</section>
+{% endblock %}
+
+

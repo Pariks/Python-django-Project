@@ -1,0 +1,31 @@
+{% load app_filters %}
+{% load humanize %}
+<div class="list-container">
+    {% if prediction.image %}
+    <div class="image-container">
+        <a href="{{prediction.get_absolute_url}}">
+            <img src="/media/{{prediction.image}}"/>
+        </a>
+    </div>
+    {% endif %}
+    <div class="content-container">
+        <h4>
+            <a href="{{prediction.get_absolute_url}}">{{prediction.title}}</a>
+        </h4>
+        <div class="content-info">
+            {{prediction.timestamp|date:"M d, Y"}}
+        </div>
+      <div class="content-preview">
+        {% if prediction.open %}
+            Results: {{prediction.prediction_set.all|prediction_record}} 
+            {% if prediction.prediction_set.all|prediction_profit > 0 %}
+                <div class='color-win'>+ ${{prediction.prediction_set.all|prediction_profit|intcomma}}</div>
+            {% else %}
+                <div class='color-loss'>- ${{prediction.prediction_set.all|prediction_profit|intcomma|slice:"1:"}}</div>
+            {% endif %}
+        {% else %}
+            Total Predictions: {{prediction.prediction_set.all|length}}
+        {% endif %}
+      </div>
+    </div>
+</div>

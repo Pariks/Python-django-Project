@@ -1,0 +1,7 @@
+{% if prediction.bet_type == 'PA' %}
+    {% include 'predictions/_parlay_prediction.html' %}
+{% elif prediction.bet_type == 'ST' %}
+    {% include 'predictions/_straight_prediction.html'%}
+{% elif prediction.bet_type == 'PR' %}    
+    {% include 'predictions/_prop_prediction.html'%}
+{% endif %}

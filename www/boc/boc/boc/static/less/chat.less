@@ -1,0 +1,105 @@
+#chat-button{
+  position:fixed;
+  bottom:10px;
+  right:10px;
+  height:50px;
+  width:50px;
+  border-radius:50px;
+  background-color:@color-gold;
+  text-align:center;
+  line-height:50px;
+  color:white;
+  font-size:30px;
+  z-index:9999;
+  cursor:pointer;
+  -webkit-transform: translateZ(0);
+}
+
+
+#chat-window{
+  position:fixed;
+  height:350px;
+  width:300px;
+  background-color:white;
+  bottom:70px;
+  right:10px;
+  border-radius:5px;
+  box-shadow: 1px 1px 3px #888888;
+  display:none;
+  z-index:9999;
+  -webkit-transform: translateZ(0);
+  #chat-header{
+    position:absolute;
+    top:0;
+    height:50px;
+    left:0;
+    right:0;
+    background-color:@color-gold;
+    border-radius:5px 5px 0 0;
+    color:white;
+    h3{
+      margin-top:10px;
+      text-transform:uppercase;
+    }
+  }
+  
+  #messages-container, #signup-container{
+    position:absolute;
+    top:50px;
+    bottom:40px;
+    left:0;
+    right:0;
+    overflow-y:scroll;
+    padding:5px;
+    .message{
+      background-color:rgb(234, 234, 234);
+      border-radius:2px;
+      padding:2px;
+      margin-bottom:3px;
+      width:90%;
+      .timestamp{
+        font-size:11px;
+        font-weight:500;
+        color:gray;
+      }
+      
+      .username{
+        font-weight:bold;
+        font-size:13px;
+      }
+    }
+  }
+  
+  #signup-container{
+    padding:100px 20px 0 20px;
+  }
+  #message-form{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    height:40px;
+    .message-form-input-container{
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 60px;
+      input{
+        width:100%;
+      }
+      
+      height:25px;
+    }
+    #message-submit{
+      position:absolute;
+      right:0;
+      bottom:0;
+      width:60px;
+      background-color:@color-gold;
+      border:0;
+      color:white;
+      height:25px;
+      
+    }
+  }
+}

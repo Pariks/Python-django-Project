@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% block title %}{{bookmaker.name}} | MMA and Boxing Sportsbooks{% endblock %}
+{% block fb_title %}{{bookmaker.name}} | MMA and Boxing Sportsbooks{% endblock %}
+{% block fb_description %}Top sportsbooks for betting on combat sports.{% endblock %}
+{% block nav-bookmakers-class %}active{% endblock %}
+{% block nav-bookmakers-class-mobile %}active{% endblock %}
+
+{% block maincontent %}
+<section class="mdl-shadow--2dp bookmakers">
+    <div class="section-header">
+        <h2>{{bookmaker.name}}</h2>
+    </div>
+    <div class="section-body">
+        <div class="clearfix">
+            {% if bookmaker.get_square_banner %}
+            <div class="pull-left banner-container">
+                {{ bookmaker.get_square_banner|safe}}
+            </div>
+            {% endif %}
+            <div class="content-container">
+                {% include 'bookmakers/_bookmaker_table.html' %}
+            </div>
+            
+                {{ bookmaker.content|safe}}
+        </div>
+    </div>
+</section>
+{% endblock %}
+  

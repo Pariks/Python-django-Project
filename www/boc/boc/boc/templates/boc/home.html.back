@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load i18n staticfiles %}
+{% load app_filters %}
+{% block css %}
+{% endblock %}
+
+{% block maincontent %}
+<div id="home">
+    <div id="splash" class="parallax">
+        <div class="home-content">
+            <h1 class="animated fadeIn">Combat Sports Investment Fund <br/>& Advisory Services</h1>
+            <h2 class="animated fadeIn">Make money betting on MMA, Boxing and Kickboxing</h2>
+            <a href="{% url 'account_signup' %}"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Join Now</a>
+              
+        </div>
+  </div>
+
+    
+   <div id="news-section">
+       <div class="home-content">
+           
+           <h2>News</h2>
+           <div class="mdl-grid">
+           {% for article in articles %}
+                {% include 'boc/_article.html' %}
+            {% endfor %}
+            </div>
+            
+            <div class="text-right">
+            <a href="{% url 'news:index' %}" class="mdl-button">More News</a>
+            </div>
+            <hr>
+
+            <h2>Predictions</h2>
+           <div class="mdl-grid">
+           {% for prediction in predictions  %}
+                {% include 'boc/_prediction.html' %}
+            {% endfor %}
+            </div>
+            <div class="text-right">
+            <a href="{% url 'predictions:index' %}" class="mdl-button">More Predictions</a>
+            </div>
+       </div>
+   </div>
+   
+   <div id="free-pick" >
+       <div class="home-content text-center">
+           <h3>
+               Enter your Phone Number for a <span style="Border-bottom:2px solid rgb(167, 122, 63)">FREE PICK</span>
+           </h3>
+           <form action="{% url 'userprofile:phone_number' %}" id="free-pick-form" class="form" method="POST">
+                      
+            {{phone_form.phone_number|material}}
+            {% csrf_token %}
+            <button type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect">Submit</button>
+            <p id="response-message" class="color-gold"></p>
+           </form>
+           
+           
+       </div>
+   </div>
+   <div id="free-betting-guide">
+       <div class="home-content text-center">
+           <h3>
+           Learn How to Bet on Fights with our Free Betting Guide
+           </h3>
+           <a href="{% url 'betting_guide' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Learn More</a>
+       </div>
+   </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+(function(){
+
+  var parallax = document.querySelectorAll(".parallax"),
+      speed = 0.3;
+    
+  $('.mdl-layout__content').scroll(function(){
+    [].slice.call(parallax).forEach(function(el,i){
+
+      var windowYOffset = $('.home-content').offset(),
+          elBackgrounPos = "0 " + ((windowYOffset.top - 164) * speed) + "px";
+          
+      el.style.backgroundPosition = elBackgrounPos;
+
+    });
+  });
+
+})();
+
+ $('#free-pick-form').on('submit', function(event) {
+      event.preventDefault();
+      
+      $.ajax({ // create an AJAX call...
+          data: $(this).serialize(), // get the form data
+          type: $(this).attr('method'), // GET or POST
+          url: $(this).attr('action'), // the file to call
+          success: function(response) { // on success..
+              $('#id_phone_number').val(""); // update the DIV
+              $('#response-message').html('Submitted');
+          },
+          error: function(response){
+              $('#response-message').html(JSON.parse(response.responseText).phone_number)
+          }
+      });
+      return false;
+    });
+</script>
+{% endblock %}
+  

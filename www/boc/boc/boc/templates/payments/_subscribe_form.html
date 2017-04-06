@@ -1,0 +1,34 @@
+{% load url from future %}
+{% load bootstrap_tags %}
+
+<div class="subscribe-form">
+    <h2 class="text-center">Premium Subscription</h2>
+    <p>
+        Once you’re a Bet on Combat member, you’ll find the most current predictions under the Prediction section here.
+    </p>
+    <p>
+        Non-members can see to past predictions for free once each event is over. The list of all predictions ever made on BetonCombat.com can be found <a href="{% url 'predictions:index' %}">here</a>.  
+    </p>
+    
+    <p>
+        BetonCombat.com provides the astute combat sports bettors a significant edge over the masses. With proprietary power rankings, videos, articles and premium picks, all provided by leading experts in the combat sports betting industry, Bet on Combat is filled with exclusive information that can’t be found anywhere else. 
+    </p>
+    
+    <p>
+    BE A MEMBER AND START GETTING FULL ACCESS TO OUR EXCLUSIVE PREDICTIONS, BANKROLL MANAGEMENT AND MUCH MORE!
+    </p>
+    
+    {% if error %}
+        <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+    <form action="{% url 'payments_ajax_subscribe' %}" class="form ajax"  data-stripe-key="{{ STRIPE_PUBLIC_KEY }}" data-replace-closest=".subscribe-form" method="POST">
+        {% csrf_token %}
+        <div class="text-center" style="margin:20px 0;">
+            {{ form }}
+        </div>
+        <input name="stripe_token" type="hidden" />
+        <div class="text-center">
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Subscribe</button>
+        </div> 
+    </form>
+</div>

@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load bootstrap %}
+{% block title %}Investing | Bet on Combat{% endblock %}
+{% block fb_title %}Invest with Bet on Combat{% endblock %}
+{% block fb_description %}Combat Sports Investment Fund & Advisory Services. Make money betting on MMA, Boxing and Kickboxing. Join Now!{% endblock %}
+{% block nav-investing-class %}active{% endblock %}
+{% block nav-investing-class-mobile %}active{% endblock %}
+{% block maincontent %}
+{% load app_filters %}
+
+{% load clever_selects_extras %}
+<section id="invest-section">
+ <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+ <!--
+    <div class="section-header">
+       <h2>{{title}}</h2>
+    </div>
+ -->
+    <div class="section-body">
+        <div class="mdl-tabs__tab-bar">
+                  <a class="mdl-tabs__tab is-active"  href="#relation-panel">INVESTOR RELATIONS</a>
+                  <a class="mdl-tabs__tab" href="#application-panel">APPLICATION FORM</a>
+        </div>
+        <div  class="mdl-tabs__panel is-active" id="relation-panel" >
+
+           <p >
+
+                {% for investrelation in investor_relation  %}
+
+                {{investrelation.content|safe}}
+
+                {%endfor %}
+           </p>
+
+        <div style="text-align:center;">
+
+            <a   href="{% url 'investor:switch' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">APPLY NOW</a>
+        </div>
+        </div>
+
+        <div class="mdl-tabs__panel" id="application-panel">
+        {% if user.is_authenticated  %}
+
+            {% if user.investor_set.all %}
+                {% if user.investor_set.all.0.approved %}
+                <div style="padding:10%;">
+                    <h5 class="color-win text-center">
+                        You have been approved to invest with Bet on Combat.
+                    </h5>
+
+                    Please enter the amount you would like to invest with Bet on Combat. We will contact with with further details once the payment has been received.
+                    <form action="{% url 'investor:index' %}" class="form ajax invest-form"  data-stripe-key="{{ STRIPE_PUBLIC_KEY }}" data-replace-closest=".subscribe-form" method="POST">
+
+                        {% csrf_token %}
+                        <div class="text-center">
+                            {{ form.amount|material }}
+                        </div>
+                        <input name="stripe_token" type="hidden" />
+                        <div class="form-actions text-center">
+                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Invest</button>
+                        </div>
+                        {% if status %}
+                            {% if status == 'success' %}
+                            <p class="alert alert-success">Successfully</p>
+                            {% elif status == 'failure' %}
+                            <p class="alert alert-danger" role="alert">Error</p>
+                            {% endif %}
+                        {% endif %}
+                    </form>
+                </div>
+                {% else %}
+
+                    <div class="alert alert-warning" role="alert">
+                    Your application has been submitted and is currently under review. We will contact you when your application has been approved.
+                    </div>
+                {% endif %}
+            {% else %}
+                <form method="post" class="full-width" action="{% url 'investor:index' %}">
+                    <h4>1. Individual Applicant</h4>
+                    {{ form.non_field_errors }}
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--6-col">
+                            {{ form.first_name|material }}
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col">
+                            {{ form.last_name|material }}
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col">
+                            {{ form.date_of_birth|material }}
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col">
+                             {{ form.address|material }}
+                        </div>
+
+                        <div class="mdl-cell mdl-cell--6-col">
+                            {{ form.city|material }}
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col">
+                            {{ form.postal_code|material }}
+                        </div>
+
+                        <div class="mdl-cell mdl-cell--6-col">
+                            {{ form.country|bootstrap_horizontal }}
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col">
+                            {{ form.territory|bootstrap_horizontal }}
+                        </div>
+
+                        <div class="mdl-cell mdl-cell--6-col">
+                            {{ form.phone_number|material}}
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col">
+                             {{ form.cell_number|material }}
+                        </div>
+
+                    </div>
+                    <h4>2. Investment Amount</h4>
+
+                    <div class="mdl-cell mdl-cell--6-col">
+                         {{ form.amount|material }}
+                    </div>
+
+                    <div>
+                    Minimum investment amount: USD$5,000
+                    </div>
+                    <div>
+                    Additional investment in the Fund does not require an application form.
+                    </div>
+
+                    <h4>3. Anticipated Investment Timeframe</h4>
+                    <p>
+                    Please provide your best estimate as to how long you wish to have funds invested with Combat Sports Investment Fund. Knowledge of the anticipated length of investment will allow us to optimise the allocation of your funds. We understand that personal circumstances may change and you may wish to redeem all (or part of) your funds. This will be undertaken in keeping with the process detailed in the “Combat Sports Investment Fund Information Document”.
+￼￼￼￼                    </p>
+                    <p>
+                    Please indicate below your anticipated length of investment.
+                    </p>
+                    {{ form.investment_timeframe|material_radio }}
+
+
+                    <h4>4. Distribution Instructions</h4>
+                    How would you like to receive your distribution?
+                    <div style="margin-top:20px;">
+                    {{ form.distribution|material_radio }}
+                    </div>
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{next}}">
+                    <p class="text-center" style="margin-top:20px;">
+                      <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Submit</button>
+                    </p>
+                </form>
+            {% endif %}
+
+        {% else %}
+        <section class="section-authentication">
+            <div class="section-body">
+                <p class="text-center">
+                    Please create a free account before submitting an application form.
+                </p>
+                <form method="post" class="full-width"  action="{% url 'account_signup' %}">
+                    {% csrf_token %}
+                    {{form.username|material}}
+                    {{form.email|material}}
+                    {{form.password1|material}}
+                    {{form.password2|material}}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <p>
+                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox">
+                          <input type="checkbox" id="checkbox" class="mdl-checkbox__input" required />
+                          <span class="mdl-checkbox__label"> Agree to <a href="{% url 'legal' %}" >Terms and Conditions</a></span>
+                        </label>
+                    </p>
+
+                    <div class="form-actions text-center">
+                      <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Register</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        {% endif %}
+        </div>
+
+    </div>
+</div>
+</section>
+{% endblock %}
+{% block scripts %}
+
+{% clever_selects_js_import %}
+{% endblock %}}
+  

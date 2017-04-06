@@ -1,0 +1,26 @@
+.btn-gold, .btn-primary{
+  background-color: @color-gold;
+  color: white;
+  &:hover, &:active, &:focus{
+    color:white;
+    background-color:lighten(@color-gold, 5%);
+  }
+}
+
+.btn-gold-empty{
+  background-color:transparent;
+  color:@color-gold;
+  border:1px solid @color-gold;
+  &:hover, &:active, &:focus{
+    color:white;
+    background-color:@color-gold;
+  }
+}
+
+
+.btn{
+  border-radius:0;
+  .transition(background-color, 0.3s);
+  .transition(color, 0.3s);
+  border-radius:3px;
+}

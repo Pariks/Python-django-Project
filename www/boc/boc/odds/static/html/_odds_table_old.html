@@ -1,0 +1,179 @@
+<div class="table-responsive mdl-shadow--2dp">
+    <table class="mdl-data-table mdl-js-data-table  odds-table">
+        <thead>
+            <th class="bet-name mdl-data-table__cell--non-numeric">Fighters</th>
+            <th class="odds best">Best Odds</th>
+            <th class="odds" data-ng-repeat="sportsbook in sportsbooks">
+                <a href="{{sportsbookUrls[$index]}}">{{sportsbookNames[$index]}}</a>
+            </th>
+            <th class="more"></th>
+        </thead>
+        <tbody data-ng-repeat="fight in event.fights|orderBy:'order'">
+            <tr class="straight odd">
+                <td class="bet-name mdl-data-table__cell--non-numeric">
+                   {{fight.bets['straight'][0].bet1}} 
+                </td>
+                <td class="odds best">
+                    {{fight.bets['straight'][0].best_odds1|formatOdds:oddsFormat:amount}}
+                </td>
+                <td class="odds" data-ng-repeat="sportsbook in sportsbooks" data-ng-click="addToParlay(fight.bets['straight'][0].bet1, sportsbook, fight.bets['straight'][0].odds[sportsbook].odds1)">
+                    <span data-ng-click="showLineHistory($event, fight.bets['straight'][0], sportsbook, 1)" data-ng-class="{'best-odds':fight.bets['straight'][0].odds[sportsbook].odds1 ===  fight.bets['straight'][0].best_odds1}">{{fight.bets['straight'][0].odds[sportsbook].odds1|formatOdds:oddsFormat:amount}}</span>
+                    <i class="material-icons {{fight.bets['straight'][0].odds[sportsbook]['odds1_arrow']}}">{{fight.bets['straight'][0].odds[sportsbook]['odds1_arrow']}}</i>                            
+                </td>
+                <td class="more" rowspan="2" data-ng-click="show = !show">
+                    {{fight.prop_count}}
+                    <i class="fa" data-ng-class="{'fa-chevron-circle-right': !show, 'fa-chevron-circle-down': show}"></i>
+                </td>
+            </tr>
+            <tr class="straight even">
+                <td class="bet-name mdl-data-table__cell--non-numeric">
+                   {{fight.bets['straight'][0].bet2}} 
+                </td>
+                <td class="odds best">
+                    {{fight.bets['straight'][0].best_odds2|formatOdds:oddsFormat:amount}}
+                </td>
+                <td class="odds"  data-ng-repeat="sportsbook in sportsbooks" data-ng-click="addToParlay(fight.bets['straight'][0].bet2, sportsbook, fight.bets['straight'][0].odds[sportsbook].odds2)">
+                    <span data-ng-click="showLineHistory($event, fight.bets['straight'][0], sportsbook, 2)" data-ng-class="{'best-odds':fight.bets['straight'][0].odds[sportsbook].odds2 ===  fight.bets['straight'][0].best_odds2}">{{fight.bets['straight'][0].odds[sportsbook].odds2|formatOdds:oddsFormat:amount}}</span>
+                    <i class="material-icons {{fight.bets['straight'][0].odds[sportsbook]['odds2_arrow']}}">{{fight.bets['straight'][0].odds[sportsbook]['odds2_arrow']}}</i>   
+                </td>
+            </tr>
+            <!-- General Props -->
+             <tr class="prop odd" data-ng-repeat-start="bet in fight.bets['general props']" data-ng-show="show">
+                <td class="bet-name mdl-data-table__cell--non-numeric">
+                   {{bet.bet1}} 
+                </td>
+                <td class="odds best">
+                    {{bet.best_odds1|formatOdds:oddsFormat:amount}}
+                </td>
+                <td class="odds"  data-ng-repeat="sportsbook in sportsbooks" data-ng-click="addToParlay(bet.bet1, sportsbook, bet.odds[sportsbook].odds1)">
+                    <span data-ng-click="showLineHistory($event, bet, sportsbook, 1)"  data-ng-class="{'best-odds':bet.odds[sportsbook].odds1 ===  bet.best_odds1}">{{bet.odds[sportsbook].odds1|formatOdds:oddsFormat:amount}}</span>
+                   <i class="material-icons {{bet.odds[sportsbook]['odds1_arrow']}}">{{bet.odds[sportsbook]['odds1_arrow']}}</i>   
+                </td>
+                <td class="more"></td>
+            </tr>
+            <tr class="prop even" data-ng-repeat-end  data-ng-show="show">
+                <td class="bet-name mdl-data-table__cell--non-numeric"><span data-ng-class="{'best-odds':bet.odds[sportsbook].odds1 ===  bet.best_odds1}">
+                   {{bet.bet2}} 
+                </td>
+                <td class="odds best">
+                    {{bet.best_odds2|formatOdds:oddsFormat:amount}}
+                </td>
+                <td class="odds" data-ng-repeat="sportsbook in sportsbooks" data-ng-click="addToParlay(bet.bet2, sportsbook, bet.odds[sportsbook].odds2)">
+                    <span data-ng-click="showLineHistory($event, bet, sportsbook, 2)" data-ng-class="{'best-odds':bet.odds[sportsbook].odds2 ===  bet.best_odds2}" data-ng-if="bet.odds[sportsbook].odds2 !== 'None'">{{bet.odds[sportsbook].odds2|formatOdds:oddsFormat:amount}}</span>
+                    <i class="material-icons {{bet.odds[sportsbook]['odds2_arrow']}}">{{bet.odds[sportsbook]['odds2_arrow']}}</i>   
+                </td>
+                <td class="more"></td>
+            </tr>
+            
+            <!-- Distance Props -->
+            <tr class="sub-heading" data-ng-show="show && fight.bets['distance props'].length > 0">
+                <td class="mdl-data-table__cell--non-numeric">Fight duration props</td>
+                <td class="odds best"></td>
+                <td class="odds" data-ng-repeat="sportsbook in sportsbooks">
+                    <a href="{{sportsbookUrls[$index]}}">{{sportsbookNames[$index]}}</a>
+                </td>
+                <td class="more"></td>
+            </tr>
+           
+             <tr class="prop odd" data-ng-repeat-start="bet in fight.bets['distance props']"  data-ng-show="show">
+                <td class="bet-name mdl-data-table__cell--non-numeric">
+                   {{bet.bet1}} 
+                </td>
+                <td class="odds best">
+                    {{bet.best_odds1|formatOdds:oddsFormat:amount}}
+                </td>
+                <td class="odds" data-ng-repeat="sportsbook in sportsbooks" data-ng-click="addToParlay(bet.bet1, sportsbook, bet.odds[sportsbook].odds1)">
+                    <span data-ng-click="showLineHistory($event, bet, sportsbook, 1)" data-ng-class="{'best-odds':bet.odds[sportsbook].odds1 ===  bet.best_odds1}">{{bet.odds[sportsbook].odds1|formatOdds:oddsFormat:amount}}</span>
+                    <i class="material-icons {{bet.odds[sportsbook]['odds1_arrow']}}">{{bet.odds[sportsbook]['odds1_arrow']}}</i>   
+                </td>
+                <td class="more"></td>
+            </tr>
+            <tr class="prop even" data-ng-repeat-end  data-ng-show="show">
+                 <td class="bet-name mdl-data-table__cell--non-numeric">
+                   {{bet.bet2}} 
+                </td>
+                <td class="odds best">
+                    {{bet.best_odds2|formatOdds:oddsFormat:amount}}
+                </td>
+                <td class="odds" data-ng-repeat="sportsbook in sportsbooks" data-ng-click="addToParlay(bet.bet2, sportsbook, bet.odds[sportsbook].odds2)">
+                    <span data-ng-click="showLineHistory($event, bet, sportsbook, 2)" data-ng-class="{'best-odds':bet.odds[sportsbook].odds2 ===  bet.best_odds2}" data-ng-if="bet.odds[sportsbook].odds2 !== 'None'">{{bet.odds[sportsbook].odds2|formatOdds:oddsFormat:amount}}</span>
+                    <i class="material-icons {{bet.odds[sportsbook]['odds2_arrow']}}">{{bet.odds[sportsbook]['odds2_arrow']}}</i>   
+                </td>
+                <td class="more"></td>
+            </tr>
+            
+            <!-- Fighter1 Props -->
+            <tr class="sub-heading" data-ng-show="show && fight.bets['fighter1 props'].length > 0">
+                <td class="mdl-data-table__cell--non-numeric">{{fight.fighter1}} props</td>
+                <td class="odds best"></td>
+                <td class="odds" data-ng-repeat="sportsbook in sportsbooks">
+                    <a href="{{sportsbookUrls[$index]}}">{{sportsbookNames[$index]}}</a>
+                </td>
+                <td class="more"></td>
+            </tr>
+             <tr class="prop odd" data-ng-repeat-start="bet in fight.bets['fighter1 props']"  data-ng-show="show">
+                <td class="bet-name mdl-data-table__cell--non-numeric">
+                   {{bet.bet1}} 
+                </td>
+                <td class="odds best">
+                    {{bet.best_odds1|formatOdds:oddsFormat:amount}}
+                </td>
+                <td class="odds" data-ng-repeat="sportsbook in sportsbooks" data-ng-click="addToParlay(bet.bet1, sportsbook, bet.odds[sportsbook].odds1)">
+                    <span data-ng-click="showLineHistory($event, bet, sportsbook, 1)" data-ng-class="{'best-odds':bet.odds[sportsbook].odds1 ===  bet.best_odds1}">{{bet.odds[sportsbook].odds1|formatOdds:oddsFormat:amount}}</span>
+                    <i class="material-icons {{bet.odds[sportsbook]['odds1_arrow']}}">{{bet.odds[sportsbook]['odds1_arrow']}}</i>   
+                </td>
+                <td class="more"></td>
+            </tr>
+            <tr class="prop even" data-ng-repeat-end  data-ng-show="show">
+                 <td class="bet-name mdl-data-table__cell--non-numeric">
+                   {{bet.bet2}} 
+                </td>
+                <td class="odds best">
+                    {{bet.best_odds2|formatOdds:oddsFormat:amount}}
+                </td>
+                <td class="odds" data-ng-repeat="sportsbook in sportsbooks" data-ng-click="addToParlay(bet.bet2, sportsbook, bet.odds[sportsbook].odds2)">
+                    <span data-ng-click="showLineHistory($event, bet, sportsbook, 2)" data-ng-class="{'best-odds':bet.odds[sportsbook].odds2 ===  bet.best_odds2}" data-ng-if="bet.odds[sportsbook].odds2 !== 'None'">{{bet.odds[sportsbook].odds2|formatOdds:oddsFormat:amount}}</span>
+                    <i class="material-icons {{bet.odds[sportsbook]['odds2_arrow']}}">{{bet.odds[sportsbook]['odds2_arrow']}}</i>   
+                </td>
+                <td class="more"></td>
+            </tr>
+            
+             <!-- Fighter2 Props -->
+             
+            <tr class="sub-heading" data-ng-show="show && fight.bets['fighter2 props'].length > 0">
+                <td class="mdl-data-table__cell--non-numeric">{{fight.fighter2}} props</td>
+                <td class="odds best"></td>
+                <td class="odds" data-ng-repeat="sportsbook in sportsbooks">
+                    <a href="{{sportsbookUrls[$index]}}">{{sportsbookNames[$index]}}</a>
+                </td>
+                <td class="more"></td>
+            </tr>
+             <tr class="prop odd" data-ng-repeat-start="bet in fight.bets['fighter2 props']"  data-ng-show="show">
+                <td class="bet-name mdl-data-table__cell--non-numeric">
+                   {{bet.bet1}} 
+                </td>
+                <td class="odds best">
+                    {{bet.best_odds1|formatOdds:oddsFormat:amount}}
+                </td>
+                <td class="odds" data-ng-repeat="sportsbook in sportsbooks" data-ng-click="addToParlay(bet.bet1, sportsbook, bet.odds[sportsbook].odds1)">
+                    <span data-ng-click="showLineHistory($event, bet, sportsbook, 1)" data-ng-class="{'best-odds':bet.odds[sportsbook].odds1 ===  bet.best_odds1}">{{bet.odds[sportsbook].odds1|formatOdds:oddsFormat:amount}}</span>
+                    <i class="material-icons {{bet.odds[sportsbook]['odds1_arrow']}}">{{bet.odds[sportsbook]['odds1_arrow']}}</i>   
+                </td>
+                <td class="more"></td>
+            </tr>
+            <tr class="prop even" data-ng-repeat-end  data-ng-show="show">
+                <td class="bet-name mdl-data-table__cell--non-numeric">
+                   {{bet.bet2}} 
+                </td>
+                <td class="odds best">
+                    {{bet.best_odds2|formatOdds:oddsFormat:amount}}
+                </td>
+                <td class="odds" data-ng-repeat="sportsbook in sportsbooks" data-ng-click="addToParlay(bet.bet2, sportsbook, bet.odds[sportsbook].odds2)">
+                    <span data-ng-click="showLineHistory($event, bet, sportsbook, 2)" data-ng-class="{'best-odds':bet.odds[sportsbook].odds2 ===  bet.best_odds2}" data-ng-if="bet.odds[sportsbook].odds2 !== 'None'">{{bet.odds[sportsbook].odds2|formatOdds:oddsFormat:amount}}</span>
+                    <i class="material-icons {{bet.odds[sportsbook]['odds2_arrow']}}">{{bet.odds[sportsbook]['odds2_arrow']}}</i>   
+                </td>
+                <td class="more"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

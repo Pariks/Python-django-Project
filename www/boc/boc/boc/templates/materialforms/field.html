@@ -1,0 +1,7 @@
+{% load app_filters %}
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    {{ field|material_input }}
+    <label for="{{ form.password.id_for_label }}" class="mdl-textfield__label" >{{field.label}}</label>
+</div>
+ {{ field.errors }}
+            

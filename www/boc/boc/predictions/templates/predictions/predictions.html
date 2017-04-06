@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block title %}Predictions | Bet on Combat{% endblock %}
+{% block fb_title %}Predictions | Bet on Combat{% endblock %}
+{% block fb_description %}Upcoming and past Bet on Combat predicitons.{% endblock %}
+{% block nav-predictions-class %}active{% endblock %}
+{% block nav-predictions-class-mobile %}active{% endblock %}
+
+
+
+{% block maincontent %}
+<section>
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+      <h2>
+          Predictions
+      </h2>
+      <div class="mdl-tabs__tab-bar">
+          <a href="#upcoming-panel" class="mdl-tabs__tab is-active">Upcoming</a>
+          <a href="#past-panel" class="mdl-tabs__tab">Past</a>
+      </div>
+    
+      <div class="mdl-tabs__panel is-active" id="upcoming-panel">
+        {% for prediction in upcoming_predictions %}
+            {% include 'predictions/_prediction_list.html' %}
+        {% endfor %}
+      </div>
+      <div class="mdl-tabs__panel" id="past-panel">
+        {% for prediction in past_predictions %}
+            {% include 'predictions/_prediction_list.html' %}
+        {% endfor %}
+      </div>
+  </div>
+</section>
+{% endblock %}
+  

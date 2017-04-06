@@ -1,0 +1,71 @@
+#home{
+  .home-content{
+    max-width:1100px;
+    margin:0 auto;
+  }
+  #splash{
+    background-image: url('/static/img/background.png');
+    background-attachment: fixed;  
+    position: relative;
+    height: 500px;
+    width: 100%;
+    box-sizing: border-box;
+    padding:100px 0 100px 0;
+    text-align:center;
+    
+     h1{
+      color:white;
+      font-size:24px;
+      line-height:1.5;
+      margin:0;
+      text-shadow: 0 2px 2px #000;
+      @media (min-width: $breakpoint-desktop) {
+        font-size:48px;
+      }
+    }
+    
+    h2{
+      color:white;
+      margin-bottom:30px;
+      font-size:16px;
+      text-shadow: 0 2px 2px #000;
+      @media (min-width: $breakpoint-desktop) {
+        font-size:30px;
+      }
+    }
+  }
+  
+  #news-section{
+    padding-bottom:30px;
+    .mdl-grid{
+      padding:0;
+    }
+    h2{
+      text-align:center;
+      
+    }
+  }
+  #free-pick{
+    background-color:white;
+    padding:50px 20px;
+    @media (min-width: $breakpoint-desktop) {
+      
+      padding:100px 20px;
+    }
+    h2{
+      margin-bottom:20px;
+      
+    }
+  }
+  #free-betting-guide{
+    padding:50px 20px;
+    @media (min-width: $breakpoint-desktop) {
+      
+      padding:100px 20px;
+    }
+    h2{
+      margin-bottom:20px;
+      
+    }
+  }
+}

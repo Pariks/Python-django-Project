@@ -1,0 +1,48 @@
+{% extends "account/base.html" %}
+
+{% block head_title %}Sign Up{% endblock %}
+{% load app_filters %}
+{% block content %}
+<section class="section-authentication">
+    <div class="section-header">
+	<p class="text-center">Join Thousands of Profitable Bettors & Investors</p>
+        <h2 class="text-center">Register</h2>
+    </div>
+    <div class="section-body">
+        <p class="text-center">Already have an account? Then please <a href="{{ login_url }}">sign in</a>.</p>
+        <form method="post" class="full-width"  action="{% url 'account_signup' %}">
+            {% csrf_token %}
+            {{form.first_name|material}}
+            {{form.last_name|material}}
+            {{form.username|material}}
+            {{form.email|material}}
+            {{form.password1|material}}
+            {{form.password2|material}}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <p style="margin-bottom:30px;">
+                {{form.news_letter|material_checkbox}}
+                <!--
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="newsletter">
+                  <input type="checkbox" id="newsletter" class="mdl-checkbox__input" />
+                  <span class="mdl-checkbox__label">I would like to receive occasional newsletters, offers and product updates from BetonCombat.com</a></span>
+                </label>
+                -->
+            </p>
+            <p>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox">
+                  <input type="checkbox" id="checkbox" class="mdl-checkbox__input" required />
+                  <span class="mdl-checkbox__label"> Agree to <a href="{% url 'legal' %}" >Terms and Conditions</a></span>
+                </label>
+            </p>
+            
+            <div class="form-actions text-center">
+              <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Register</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+

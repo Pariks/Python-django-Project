@@ -1,0 +1,9 @@
+.color-win{
+  color:$color-win !important;
+}
+.color-loss{
+  color:$color-loss !important;
+}
+.color-gold{
+  color: unquote("rgb(#{$color-accent})");
+}

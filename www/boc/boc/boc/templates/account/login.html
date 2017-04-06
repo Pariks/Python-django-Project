@@ -1,0 +1,39 @@
+{% extends "account/base.html" %}
+
+{% block nav-login-class %}active{% endblock %}
+{% block nav-login-class-mobile %}active{% endblock %}
+{% block head_title %}Sign In{% endblock %}
+{% load app_filters %}
+{% block content %}
+<section class="section-authentication">
+    <div class="section-header">
+        <h2 class="text-center">Login</h2>
+    </div>
+    <div class="section-body">
+        <p>If you have not created an account yet, then please <a href="{{ signup_url }}">sign up</a> first.</p>
+        <form method="post" class="full-width" action="{% url 'account_login' %}">
+            {% csrf_token %}
+              <div>
+                {{form.login|material}}
+              </div>
+              <div>
+                  
+              {{form.password|material}}
+              </div>
+            
+            
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+              
+            <div class="form-actions text-center">
+                <p>
+                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button>
+                </p>
+                <a class="button secondaryAction" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+               
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% load url from future %}
+
+<div class="change-subscription">
+    <h4>Change Subscription</h4>
+    <p class="lead">
+        {% if request.user.customer.current_subscription.plan %}
+            You currently have the <strong>{{ request.user.customer.current_subscription.plan_display }}</strong> plan.
+        {% else %}
+            You currently do not have a plan.
+        {% endif %}
+    </p>
+    {% if error %}
+        <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+    <form action="{% url 'payments_ajax_change_plan' %}" method="POST" class="form-inline ajax" data-replace-closest=".change-subscription">
+        {% csrf_token %}
+        {{ form }}
+        <div style="margin-top:10px;">
+        <button type="submit" class="change-subscription mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Change</button>
+        </div>
+    </form>
+</div>

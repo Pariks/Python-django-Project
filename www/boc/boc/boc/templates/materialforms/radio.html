@@ -1,0 +1,23 @@
+<!--
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+  <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2" />
+  <span class="mdl-radio__label">Second</span>
+</label>
+-->
+
+{% for choice in field %}
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="{{field.name}}_{{ choice.index }}">
+        <input name="{{ choice.name }}" class="mdl-radio__button" type="radio" id="{{field.name}}_{{ choice.index }}" value={{ choice.choice_value }}>
+        <span class="mdl-radio__label">{{ choice.choice_label }}</span>
+    </label>
+{% endfor %}
+
+{% for error in field.errors %}
+    <span class="help-block {{ form.error_css_class }}">{{ error }}</span>
+{% endfor %}
+
+{% if field.help_text %}
+<p class="help-block">
+    {{ field.help_text|safe }}
+</p>
+{% endif %}

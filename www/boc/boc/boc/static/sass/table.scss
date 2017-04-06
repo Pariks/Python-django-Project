@@ -1,0 +1,13 @@
+.mdl-data-table{
+  width:100%;
+  margin-bottom:20px;
+  &.no-hover{
+    tbody {
+        tr {
+          &:hover {
+            background-color: transparent;
+          }
+        }
+      }
+  }
+}

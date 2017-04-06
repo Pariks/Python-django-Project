@@ -1,0 +1,50 @@
+<div class="container">
+            <div class="clearfix">
+                <div class="pull-right">
+                {% if user.is_authenticated %}
+                    {{user.username}} | <a href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a> | <a href="{% url 'join'%}">Register</a>
+                {% endif %}
+            </div>
+            </div>
+            
+            <div id="header">
+                <img id="logo" src="{% static "img/logo.png" %}"/>
+                <img id="banner-image"  src="{% static "img/header-banner.png" %}"/>
+            </div>
+            <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-0">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse-0">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            {% block nav-home %}<a href="{% url 'home' %}">Home</a>{% endblock %}
+                        </li>
+                        <li>
+                            {% block nav-news %}<a href="/news/">News</a>{% endblock %}
+                        </li>
+                         <li>
+                            {% block nav-odds %}<a href="{% url 'odds:index' %}">Odds</a>{% endblock %}
+                        </li>
+                        <li>
+                            {% block nav-predictions %}<a href="{% url 'predictions:index' %}">Predictions</a>{% endblock %}
+                        </li>
+                        <li>
+                            {% block nav-statistics %}<a href="{% url 'statistics:index' %}">Statistics</a>{% endblock %}
+                        </li>
+                        <li>
+                            {% block nav-bookmakers %}<a href="{% url 'bookmakers:index' %}">Bookmakers</a>{% endblock %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        </div>

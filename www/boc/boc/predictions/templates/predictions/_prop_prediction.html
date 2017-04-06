@@ -1,0 +1,73 @@
+  {% load app_filters %}
+ <section class="prediction">
+     <div class="section-header clearfix">
+         
+        <div class="bet-type">Prop Bet</div>
+        <h4 class="bet-name">
+        {% if prediction.prediction %}
+            {{prediction.prediction|striptags|safe}} ({{prediction.odds|format_odds}})
+        {% else %}
+            Coming Soon
+        {% endif %}
+        
+        <!--
+        <div class="risk">
+            Risk: ${{prediction.risk}}
+        </div>
+        -->
+        </h4>
+        
+        <div class="fight-name">
+            {{prediction.fight.all.0.fighter1}} vs. {{prediction.fight.all.0.fighter2}}
+        </div>
+        
+     </div>
+     <div class="section-body">
+         <!-- breakdown -->
+         {% if prediction.breakdown %}
+         <h3>Breakdown</h3>
+         {{prediction.breakdown|safe}}
+         {% endif %}
+         
+         <!-- analysis -->
+         <h3>
+            Prediction
+         </h3>
+               
+         <table class="prediction-table  mdl-data-table mdl-js-data-table no-hover">
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <strong>
+                        {% if prediction.prediction %}
+                            {{prediction.prediction|striptags|safe}} - Straight Bet
+                        {% else %}
+                            Coming Soon
+                        {% endif %}
+                        </strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Odds:</strong></td><td>{{prediction.odds|format_odds}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Risk:</strong></td><td>${{prediction.risk}}</td>
+                </tr>
+                <tr>
+                    <td><strong>To Win:</strong></td><td>${{prediction.win}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Outcome:</strong></td><td class="color-{{prediction.result|lower}}">{{prediction.result}}</td>
+                </tr>
+            </tbody>
+        </table>
+         <!-- outcome -->
+         <h3>
+            Outcome:
+         </h3>
+         <div class="outcome">
+         {{prediction.outcome|safe}}
+         </div>
+         <h4 class="text-center"><span class="{{prediction.result|lower}} result">{{prediction.result}}</span></h4>
+     </div>
+ </section>

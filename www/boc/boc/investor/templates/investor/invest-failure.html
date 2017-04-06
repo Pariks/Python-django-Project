@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load bootstrap %}
+{% block title %}Investing | Bet on Combat{% endblock %}
+{% block fb_title %}Invest with Bet on Combat{% endblock %}
+{% block fb_description %}Combat Sports Investment Fund & Advisory Services. Make money betting on MMA, Boxing and Kickboxing. Join Now!{% endblock %}
+{% block nav-investing-class %}active{% endblock %}
+{% block nav-investing-class-mobile %}active{% endblock %}
+{% block maincontent %}
+
+{% load clever_selects_extras %}
+<div class="container main-container">
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="section" id="join-section">
+                <div class="section-header text-center">
+                    <h1>Investing</h1>
+                </div>
+                <div class="section-body min-height">
+                    <div class="alert alert-danger" role="alert">
+                        Your transaction failed to be processed.
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+
+{% clever_selects_js_import %} 
+{% endblock %}}
+  

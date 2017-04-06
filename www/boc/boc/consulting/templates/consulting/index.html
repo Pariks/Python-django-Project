@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% load bootstrap_tags %}
+{% load humanize i18n %}
+{% load app_filters %}
+{% load clever_selects_extras %}
+{% load bootstrap %}
+{% load staticfiles %}
+
+{% block title %}Consulting | Bet on Combat{% endblock %}
+{% block fb_title %}Consulting | Bet on Combat{% endblock %}
+{% block fb_description %}Upcoming and past Bet on Combat predicitons.{% endblock %}
+{% block nav-consulting-class %}active{% endblock %}
+{% block nav-consulting-class-mobile %}active{% endblock %}
+
+
+
+{% block maincontent %}
+<section>
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+      <h2>
+          Consulting 
+      </h2>
+      <div class="mdl-tabs__tab-bar">
+          <a href="#membership-panel" class="mdl-tabs__tab {% if consultation_var == 0 %}is-active{% endif %}">Membership</a>
+          <a href="#consultation-panel" class="mdl-tabs__tab {% if consultation_var == 1 %}is-active{% endif %}">Consultation</a>
+          <a href="#faq-panel" class="mdl-tabs__tab">FAQ</a>
+      </div>
+      <div class="mdl-tabs__panel {% if consultation_var == 0 %}is-active{% endif %}" id="membership-panel">
+        <div class="row">
+      <h3 class="text-center"><strong>Membership Plans</strong></h3>
+      <div class="text-center"><p>Ready to jump into the action and see what we're all about? <a href="{% url 'account_signup'%}">Create your free account</a> now<br> ---- it's easy and takes only a couple of minutes.</p><br></div>
+              <div class="col-md-4">
+              <div class="panel panel-primary">
+                 <div class="panel-heading">
+                     <h3 class="panel-title text-center"><strong>Weekly Access</strong></h3>
+                 </div>
+                 <div class="panel-body">
+                     <ul>
+                         <li>Access to all combat sports preditions for the next fight week. If there are multiple events on same fight week, all events are included</li>
+                         <li>Plus in-depth reasoning & analysis for each and every bets for one week, including recommended stakes % with best odds available.</li>
+                         <li>Access to live chat room with 400+ active bettors</li>
+                         <li>Real time Bet Alerts</li>
+                     </ul>
+                     <br>
+                     <br>
+                     <br>
+                     <hr />
+                     <h5 class="text-center"><strong>$49.99/Week</strong></h5>
+                     <div class="text-center subscribe-form">
+                           {% if not user.is_authenticated %}
+                             <a href="{% url 'account_signup' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Sign Up</a>
+                               {% else %}
+                                 <form action="{% url 'payments_ajax_subscribe' %}" class="form ajax"  data-stripe-key="{{ STRIPE_PUBLIC_KEY }}" data-replace-closest=".subscribe-form" method="POST">
+                                       {% csrf_token %}
+                                    <input name="stripe_token" type="hidden" />
+                                    <select id="id_plan" name="plan" style="visibility:hidden">
+                                        <option value="weekly" selected="selected">Premium Account ($49/week)</option>
+                                    </select>
+                                    <div class="text-center">
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple--effect">Subscribe</button>
+                                    </div> 
+                                </form>
+                            {% endif %}                                                                                                      
+                    </div>
+                 </div>
+             </div>
+             </div>
+             <div class="col-md-4">
+                  <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h3 class="panel-title text-center"><strong>Monthly Membership</strong></h3>
+                  </div>
+                  <div class="panel-body">
+                      <ul>
+                          <li>Save 50% and get access to all combat sports predictions for the next 30 days.</li>
+                          <li>Plus in-depth reasoning & analysis for each and every bets, including recommended stakes % with the best odds available.</li>
+                          <li>Access to live chat room with 400+ active bettors</li>
+                          <li>Real time Bet Alerts</li>
+                          <li>Goal 12-15%+ return on your investment a month</li>
+                          <li>Profit or you get another month absolutely free!</li>
+                      </ul>
+                      <hr />
+                      <h5 class="text-center"><strong>$99.99/Month</strong></h5>
+                      <div class="text-center subscribe-form">
+                            {% if not user.is_authenticated %}
+                              <a href="{% url 'account_signup' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Sign Up</a>
+                                {% else %}
+                                  <form action="{% url 'payments_ajax_subscribe' %}" class="form ajax"  data-stripe-key="{{ STRIPE_PUBLIC_KEY }}" data-replace-closest=".subscribe-form" method="POST">
+                                        {% csrf_token %}
+                                        <input name="stripe_token" type="hidden" />
+                                        <select id="id_plan" name="plan" style="visibility:hidden" >
+                                            <option value="monthly" selected="selected">Premium Account ($99/month)</option>
+                                        </select>
+                                        <div class="text-center">
+                                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple--effect">Subscribe</button>
+                                        </div> 
+                                </form>
+                                {% endif %}                                                                                                      
+                    </div>
+                  </div>
+              </div>
+              </div>
+              <div class="col-md-4">
+               <div class="panel panel-primary">
+                  <div class="panel-heading">   
+                      <h3 class="panel-title text-center"><strong>Yearly Membership</strong></h3>
+                  </div>
+                  <div class="panel-body">
+                      <ul>
+                           <li>Save 60% and get access to all combat sports predictions for the next 30 days.</li>
+                           <li>Plus in-depth reasoning & analysis for each and every bets, including recommended stakes % with the best odds
+                           <li>Access to live chat room with 400+ active bettors</li>
+                           <li>Real time Bet Alerts</li>
+                           <li>Goal 30%+ return on your investment a month</li>
+                           <li>Profit or you get another month absolutely free!</li>
+                       </ul>
+                       <hr />
+                       <h5 class="text-center"><strong>$999.99/Year</strong></h5>                                                            
+                      <div class="text-center subscribe-form">
+                          {% if not user.is_authenticated %}
+                          <a href="{% url 'account_signup' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Sign Up</a>
+                          {% else %}
+                          <form action="{% url 'payments_ajax_subscribe' %}" class="form ajax"  data-stripe-key="{{ STRIPE_PUBLIC_KEY }}" data-replace-closest=".subscribe-form" method="POST">
+                             {% csrf_token %}
+                             <input name="stripe_token" type="hidden" />
+                             <select id="id_plan" name="plan" style="visibility:hidden">
+                                 <option value="yearly" selected="selected">Premium Account ($999/year)</option>
+                             </select>
+                             <div class="text-center">
+                                 <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect">Subscribe</button>
+                              </div> 
+                           </form>
+                          {% endif %}
+                       </div>
+                  </div>
+              </div>
+              </div>
+          </div>
+              <div class="row">
+                  <div class="col-md-12">
+                  <div class="steps-wrapper">
+                      <div class="arrow-steps clearfix text-center">
+                          <div class="step current"> <span> 3 EASY STEPS</span> </div>
+                          <div class="step step1"> <span>STEP 1 SIGN UP</span> </div>
+                          <div class="step step2"> <span>STEP 2 PLACE BETS*</span> </div>
+                          <div class="step step3"> <span>STEP 3 WATCH YOUR FIGHT</span> </div>
+                  </div>
+               </div>
+           </div>
+         </div>
+      </div>
+      <div class="mdl-tabs__panel {% if consultation_var == 1 %}is-active{% endif %}" id="consultation-panel">
+          <h3 class="text-center"><strong>Schedule A Consultation</strong></h3>
+          {% if req_sub %}
+          <div class='row'>
+          <div class='col-md-10 col-md-offset-1 text-center'>
+          <div class="alert alert-success" role="alert">
+           Request Submitted
+          </div>
+          </div>
+          </div>
+          {% endif %}
+          <div class='row'>
+              <div class='col-md-10 col-md-offset-1'>
+          <h5 class="text-center">Talk to one of our experienced combat sports investment consultant at no charge</h5>
+          <br>
+          <p class='text-center'>Please complete this form as it will allow one of the analysts to better formulate a combat sports
+          investing strategy for you. As you can see we are not here just to give you a predicted outcome,
+          take your money and wish you a good day. We are here to assist you in your long term journey to
+          financial freedom through combat sports investment. This will be a Skype call meeting. The details will be sent to you by email</p>
+          <p class='text-center'>We strongly encourage our clients not to deviate from the presented bankroll preservation plan.</p>
+          <form method="post" class="full-width" action="{% url 'consulting:index' %}">
+              {% csrf_token %}
+                      {{ form.non_field_errors }}
+                      <div class="mdl-grid">
+                          <div class="mdl-cell mdl-cell--6-col">
+                              {{ form.first_name|material }}
+                          </div>
+                          <div class="mdl-cell mdl-cell--6-col">
+                              {{ form.last_name|material }}
+                          </div>
+                          <div class="mdl-cell mdl-cell--6-col">
+                              {{ form.phone|material }}
+                          </div>
+                          <div class="mdl-cell mdl-cell--6-col">
+                              {{ form.email|material }}
+                         </div>                                                                                                             
+ 
+                         <div class="mdl-cell mdl-cell--12-col">
+                             {{ form.matter|material }}
+                         </div>
+                         <div class="mdl-cell mdl-cell--7-col">
+                             {{ form.date|material }}
+                         </div>
+
+                         <div class="mdl-cell mdl-cell--7-col">
+                             <strong>Select at least 3 times that work for you.</strong>
+                         </div>
+
+                         <div class="mdl-cell mdl-cell--7-col">
+                             {{ form.start_time_1|material }}
+                         </div>
+                         <div class="mdl-cell mdl-cell--7-col">
+                             {{ form.start_time_2|material }}
+                         </div>
+ 
+                         <div class="mdl-cell mdl-cell--7-col">
+                             {{ form.start_time_3|material}}
+                         </div>
+                                                                                                                                           
+                     </div>
+                     <p class="text-center" style="margin-top:20px;">
+                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Schedule</button>
+                     </p>
+       </form>
+      </div>
+  </div>
+      </div>
+      <div class="mdl-tabs__panel" id="faq-panel">                                                                                
+          {% load flatpages %}
+          {% get_flatpages as flatpages %}
+          {% for page in flatpages %}
+          {% if page.title == 'Consulting FAQ' %}
+          {{page.content | safe}}
+          {% endif %}
+          {% endfor %}
+      </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "css/bootstrap-datetimepicker.css" %}"/>
+{% endblock %}
+
+
+{% block scripts %}                                                                                                                
+
+<script type="text/javascript" src="{% static "js/moment.js" %}"></script>
+<script type="text/javascript" src="{% static "js/transition.js" %}"></script>
+<script type="text/javascript" src="{% static "js/collapse.js" %}"></script>
+<script type="text/javascript" src="{% static "js/bootstrap-datetimepicker.min.js" %}"></script>
+<script type="text/javascript">
+            $(document).ready(function(){
+                $('#id_date').datetimepicker({
+                    format: "YYYY-MM-DD",
+                });
+                current_date = new Date();
+                $('#id_date').data("DateTimePicker").minDate(current_date);
+                
+                $('#id_start_time_1').datetimepicker({
+                    format: "HH:mm",
+                });
+                current_date = new Date();
+                $('#id_start_time_1').data("DateTimePicker").minDate(current_date);
+                });
+        
+                $('#id_start_time_2').datetimepicker({
+                    format: "HH:mm",
+                });
+                current_date = new Date();
+                $('#id_start_time_2').data("DateTimePicker").minDate(current_date);
+
+                $('#id_start_time_3').datetimepicker({
+                    format: "HH:mm",                                                                                                       
+                });
+                current_date = new Date();
+                $('#id_start_time_3').data("DateTimePicker").minDate(current_date);
+</script>
+{% endblock %}
+
